@@ -21,6 +21,27 @@ public class Character extends GameObject {
 		}
 		return itemNames;
 	}
+	//Add an item to inventory
+	public String addItem(String itemName)
+	{
+		ArrayList<Item> roomItems = location.items;
+		String result = "";
+		for (Item items: roomItems)
+		{
+			if (items.getName().equals(itemName))
+			{
+				Item foundItem = items;
+				inventory.add(foundItem);
+				roomItems.remove(foundItem);
+				result = "Hooray! The item " + foundItem.getName() + " is now in your inventory. The description is " + foundItem.getDescription() + ".";
+			}
+			else
+			{
+				result = "Sorry! The item is not in this room.";
+			}
+		}
+		return result;
+	}
 	
 	//This isn't working right yet
 	public String move(String direction) {
