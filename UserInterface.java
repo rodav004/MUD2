@@ -28,6 +28,9 @@ public class UserInterface {
 		System.out.println(Game.room1.getName());
 		
 		System.out.println("Hello " + name + "! You are in " + Game.room1.name);
+		System.out.println("Enter command");
+		String command = input.nextLine();
+		Game.parse(command); //I'm unsure about what we would call parse on
 		**/
 		
 	}
