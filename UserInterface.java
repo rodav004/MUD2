@@ -18,7 +18,7 @@ public class UserInterface {
 		String r = Game.person.move(direction);
 		System.out.println(r);
 		
-		/**creating a new charcater hopefully
+		creating a new charcater hopefully
 		input = new Scanner(System.in);
 		System.out.println("What is your name?");
 		String name = input.next();
@@ -28,10 +28,12 @@ public class UserInterface {
 		System.out.println(Game.room1.getName());
 		
 		System.out.println("Hello " + name + "! You are in " + Game.room1.name);
-		System.out.println("Enter command");
-		String command = input.nextLine();
-		Game.parse(command); //I'm unsure about what we would call parse on
-		**/
+		do {
+			System.out.println("Enter command")
+			String command = input.next();
+			//Game.parse(command); idk what to call parse on
+		} while (!command.equals("exit")); //also unworking but the concept is there
+		
 		
 	}
 
