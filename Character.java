@@ -43,6 +43,23 @@ public class Character extends GameObject {
 		return result;
 	}
 	
+        public String removeItem(String itemName)
+	{
+		String result = "";
+		ArrayList<Item> inventoryItems = this.inventory;
+		ArrayList<Item> roomItems = location.items;
+		for (Item items : inventoryItems)
+			if (items.getName().equals(itemName))
+			{
+				Item foundItem = items;
+				roomItems.add(foundItem);
+				inventory.remove(foundItem);
+				result = "The item " + itemName + " has been removed from your inventory and is in " + location + ".";
+			}
+			else result = "The item " + itemName + " is not in your inventory.";
+		return result;
+	}
+	
 	//This isn't working right yet
 	public String move(String direction) {
 		String newRoom = null;
