@@ -39,7 +39,7 @@ public class UserInterface {
 				System.out.println("You have ended the game");
 				System.exit(0);
 			}
-			Parse.parse(command);
+			Parse.parse(playerOne, command);
 		}
 		
 		
