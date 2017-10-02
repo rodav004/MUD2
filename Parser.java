@@ -12,13 +12,16 @@ public class Parser {
 			String r = "Exiting the game...";
 		}
 		else if (splitStrings.get(0).equals("move")) {
+			playerOne.move(splitStrings.get(1));
 			String r = playerOne.move(splitStrings.get(1));
 		}
 		
 		else if (splitStrings.get(0).equals("get")) {
+			playerOne.addItem(splitStrings.get(1));
 			String r = playerOne.addItem(splitStrings.get(1));
 		}
 		else if (splitStrings.get(0).equals("drop")) {
+			playerOne.removeItem(splitStrings.get(1));
 			String r = playerOne.removeItem(splitStrings.get(1));
 		}
 		else {
