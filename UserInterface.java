@@ -29,11 +29,18 @@ public class UserInterface {
 		System.out.println(Game.room1.getName());
 		
 		System.out.println("Hello " + name + "! You are in " + Game.room1.name);
-		do {
-			System.out.println("Enter command")
+		boolean end = false;
+		while (!end) {
+			System.out.println("Enter command");
 			String command = input.next();
-			//Game.parse(command); idk what to call parse on
-		} while (!command.equals("exit")); //also unworking but the concept is there
+			if (command.equals("exit"))
+			{
+				end = true;
+				System.out.println("You have ended the game");
+				System.exit(0);
+			}
+			Parse.parse(command);
+		}
 		
 		
 	}
