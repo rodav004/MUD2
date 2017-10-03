@@ -60,50 +60,55 @@ public class Character extends GameObject {
 		return result;
 	}
 	
-	//This isn't working right yet
 	public String move(String direction) {
 		String newRoom = null;
 		
 		if (direction.equals("north") || direction.equals("up")) {
 			Door exit = location.doors[0];
 			if (exit != null) {
-				newRoom = "You are in the " + exit.room1.name + ". "+ exit.room1.description;
-				this.location = exit.room1;
+				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+				this.location = exit.room;
 			}
-			else {newRoom = "There is not a door in that direction!";
+			else {
+				newRoom = "There is not a door in that direction!";
 			}
 		}
 		else if (direction.equals("south") || direction.equals("down")) {
-			Door exit = location.doors[2];
+			Door exit = this.location.doors[2];
 			if (exit != null) {
-				newRoom = "You are in the " + exit.room2.name + ". "+ exit.room2.description;
-				this.location = exit.room2;
+				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+				this.location = exit.room;
 			}
-			else {newRoom = "There is not a door in that direction!";
+			else {
+				newRoom = "There is not a door in that direction!";
 			}
 		}
 		else if (direction.equals("east") || direction.equals("right")) {
 			Door exit = location.doors[1];
 			if (exit != null) {
-				newRoom = "You are in the " + exit.room2.name + ". "+ exit.room2.description;
-				this.location = exit.room2;
+				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+				this.location = exit.room;
 			}
-			else {newRoom = "There is not a door in that direction!";
+			else {
+				newRoom = "There is not a door in that direction!";
 			}
 		}
 		else if (direction.equals("west") || direction.equals("left")) {
 			Door exit = location.doors[3];
 			if (exit != null) {
-				newRoom = "You are in the " + exit.room1.name + ". "+ exit.room1.description;
-				this.location = exit.room1;
+				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+				this.location = exit.room;
 			}
-			else {newRoom = "There is not a door in that direction!";
+			else {
+				newRoom = "There is not a door in that direction!";
 			}
 		}
 		else{
 			newRoom = "Sorry, that is not a valid direction!";
 		}
+		
 		return newRoom;
+		
 	}
 	
 	
