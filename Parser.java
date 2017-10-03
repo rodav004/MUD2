@@ -2,7 +2,12 @@ package mud;
 
 
 public class Parser {
-	
+/**
+ * 
+ * @param playerOne the character doing the action
+ * @param input the action to be done
+ * @return a String saying the result of the action
+ */	
 	public static String parse(Character playerOne, String input) {
 		String[] splitStrings = input.split(" ");
 		String r = "test";
