@@ -1,6 +1,6 @@
 package mud;
 import java.util.Scanner;
-
+import java.util.ArrayList;
 
 public class UserInterface {
 	
@@ -13,10 +13,11 @@ public class UserInterface {
 		input = new Scanner(System.in);
 		System.out.println("What is your name?");
 		String name = input.nextLine();
-
-		Character playerOne = new Character(name, "You have no description yet.", Game.room1, null);
+		ArrayList<Item> inventory = new ArrayList<Item>();
+		Character playerOne = new Character(name, "You have no description yet.", Game.room1, inventory);
 		
-		System.out.println("Hello " + name + "! You are in " + Game.room1.name);
+		String roomName = Game.room1.getName();
+		System.out.println("Hello " + name + "! You are in " + roomName);
 		
 		boolean end = false;
 		while (!end) {
@@ -28,10 +29,10 @@ public class UserInterface {
 				System.out.println("You have ended the game");
 				System.exit(0);
 			}
-		
-			String result = Parser.parse(playerOne,command);
+			String result = Parse.parse(playerOne, command);
 			System.out.println(result);
 		}
+		
 		
 	}
 
