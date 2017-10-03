@@ -35,12 +35,13 @@ public class Character extends GameObject {
 		String result = null;
 		for (Item items: roomItems)
 		{
-			if (items.name.equals(itemName))
+			String roomItemName = items.name;
+			if (roomItemName.equals(itemName))
 			{
 				Item foundItem = items;
 				inventory.add(foundItem);
 				roomItems.remove(foundItem);
-				result = "Hooray! The item " + foundItem.getName() + " is now in your inventory. The description is " + foundItem.getDescription() + ".";
+				result = "Hooray! The item " + foundItem.getName() + " is now in your inventory. The description is: " + foundItem.getDescription() + ".";
 			}
 			else result = "Sorry! The item is not in this room.";
 		}
@@ -62,7 +63,7 @@ public class Character extends GameObject {
 				Item foundItem = items;
 				roomItems.add(foundItem);
 				inventory.remove(foundItem);
-				result = "The item " + itemName + " has been removed from your inventory and is in " + location + ".";
+				result = "The item " + itemName + " has been removed from your inventory and is in " + location.name + ".";
 			}
 			else result = "The item " + itemName + " is not in your inventory.";
 			}
