@@ -77,7 +77,7 @@ public class Character extends GameObject {
 	 * @return String stating whether or not the character has moved rooms
 	 */
 	public String move(String direction) {
-		String newRoom = null;
+		String newRoom;
 
 		switch (direction) {
 			case "up":
