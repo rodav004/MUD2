@@ -1,11 +1,12 @@
 package mud;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Character extends GameObject {
 	Room location;
-	ArrayList<Item> inventory;
+	List<Item> inventory;
 	
-	public Character(String name, String description, Room location, ArrayList<Item> inventory) {
+	public Character(String name, String description, Room location, List<Item> inventory) {
 		this.description = description;
 		this.name = name;
 		this.location = location;
@@ -13,11 +14,11 @@ public class Character extends GameObject {
 	}
 	/**
 	 * 
-	 * @return an ArrayList of the names of the items in inventory
+	 * @return an List of the names of the items in inventory
 	 */
-	public ArrayList<String> getItems() {
-		ArrayList<Item> items = this.inventory;
-		ArrayList<String> itemNames = new ArrayList<>();
+	public List<String> getItems() {
+		List<Item> items = this.inventory;
+		List<String> itemNames = new ArrayList<>();
 		for (Item item : items) {
 			itemNames.add(item.name);
 		}
@@ -31,7 +32,7 @@ public class Character extends GameObject {
 	
 	public String addItem(String itemName)
 	{
-		ArrayList<Item> roomItems = new ArrayList<>(location.items);
+		List<Item> roomItems = new ArrayList<>(location.items);
 		String result = null;
 		for (Item items: roomItems)
 		{
@@ -55,8 +56,8 @@ public class Character extends GameObject {
 	public String removeItem(String itemName)
 	{
 		String result = null;
-		ArrayList<Item> inventoryItems = new ArrayList<>(this.inventory);
-		ArrayList<Item> roomItems = new ArrayList<>(location.items);
+		List<Item> inventoryItems = new ArrayList<>(this.inventory);
+		List<Item> roomItems = new ArrayList<>(location.items);
 		for (Item items : inventoryItems) {
 			if (items.name.equals(itemName))
 			{

@@ -1,12 +1,12 @@
 package mud;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Room extends GameObject {
-	ArrayList<Item> items;
-	ArrayList<Character> characters;
+	List<Item> items;
+	List<Character> characters;
 	Door[] doors;
 	
-	public Room(String name, String description, ArrayList<Item> items, ArrayList<Character> characters,Door[] doors) {
+	public Room(String name, String description, List<Item> items, List<Character> characters,Door[] doors) {
 		this.name = name;
 		this.description = description;
 		this.items = items;

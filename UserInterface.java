@@ -1,5 +1,6 @@
 package mud;
 import java.util.Scanner;
+import java.util.List;
 import java.util.ArrayList;
 
 public class UserInterface {
@@ -13,7 +14,7 @@ public class UserInterface {
 		input = new Scanner(System.in);
 		System.out.println("What is your name?");
 		String name = input.nextLine();
-		ArrayList<Item> inventory = new ArrayList<Item>();
+		List<Item> inventory = new ArrayList<Item>();
 		Character playerOne = new Character(name, "You have no description yet.", Game.room1, inventory);
 		
 		String roomName = Game.room1.getName();
