@@ -78,6 +78,7 @@ public class Character extends GameObject {
 	public String move(String direction) {
 		String newRoom = null;
 		
+		direction = direction.toLowerCase();
 		if (direction.equals("north") || direction.equals("up")) {
 			Door exit = location.doors[0];
 			if (exit != null) {
