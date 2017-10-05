@@ -77,57 +77,41 @@ public class Character extends GameObject {
 	 * @return String stating whether or not the character has moved rooms
 	 */
 	public String move(String direction) {
-		String newRoom;
+		String newRoom = null;
+		Door exit = null;
+		boolean validDirection = true;
 
 		switch (direction) {
 			case "up":
 			case "north":
-				Door exit = location.doors[0];
-				if (exit != null) {
-					newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-					this.location = exit.room;
-				}
-				else {
-					newRoom = "There is not a door in that direction!";
-				}
+				exit = location.doors[0];
 				break;
 			case "down":
 			case "south":
-				Door exit = this.location.doors[2];
-				if (exit != null) {
-					newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-					this.location = exit.room;
-				}
-				else {
-					newRoom = "There is not a door in that direction!";
-				}
+				exit = this.location.doors[2];
 				break;
 			case "right":
 			case "east":
-				Door exit = location.doors[1];
-				if (exit != null) {
-					newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-					this.location = exit.room;
-				}	
-				else {
-					newRoom = "There is not a door in that direction!";
-				}
+				exit = location.doors[1];
 				break;
 			case "left":
 			case "west":
-				Door exit = location.doors[3];
-				if (exit != null) {
-					newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-					this.location = exit.room;
-				}
-				else {
-					newRoom = "There is not a door in that direction!";
-				}
+				exit = location.doors[3];
 				break;
 			default:
-				newRoom = "Sorry, that is not a valid direction!";
+				validDirection = false;
 				break;
-			}
+		}
+
+		if (validDirection && exit != null) {
+			newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+			this.location = exit.room;
+		}
+		else if (validDirection && exit == null) {
+			newRoom = "There is no door in that direction!";
+		}
+		else if (!validDirection) {
+			newRoom = "Sorry, that is not a valid direction!";
 		}
 		
 		return newRoom;
