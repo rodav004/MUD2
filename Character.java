@@ -78,6 +78,8 @@ public class Character extends GameObject {
 	 */
 	public String move(String direction) {
 		String newRoom = null;
+
+		direction = direction.toLowerCase();
 		Door exit = null;
 		boolean validDirection = true;
 

@@ -30,7 +30,7 @@ public class UserInterface {
 				System.out.println("You have ended the game");
 				System.exit(0);
 			}
-			String result = Parse.parse(playerOne, command);
+			String result = Parser.parse(playerOne, command);
 			System.out.println(result);
 		}
 		
