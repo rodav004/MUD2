@@ -44,6 +44,9 @@ public class Character extends GameObject {
 			}
 			else result = "Sorry! The item is not in this room.";
 		}
+		if (roomItems.isEmpty()) {
+			result = "Sorry! The item is not in this room.";
+		}
 		return result;
 	}
 	/**
@@ -66,6 +69,9 @@ public class Character extends GameObject {
 			}
 			else result = "The item " + itemName + " is not in your inventory.";
 			}
+		if (inventory.isEmpty()) {
+			result = "Sorry, your inventory is empty.";
+		}
 		return result;
 	}
 	
