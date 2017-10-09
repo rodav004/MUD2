@@ -9,7 +9,7 @@ public class Parser {
  * @return a String saying the result of the action
  */	
 	public static String parse(Character playerOne, String input) {
-		String[] splitStrings = input.split(" ");
+		String[] splitStrings = input.toLowerCase().split(" ");
 		String r = "test";
 		
 		if (splitStrings[0].equals("exit")) {
