@@ -14,6 +14,7 @@ public class UserInterface {
 	
 	private static Scanner input;
 	private JTextField inputBox;
+	private JTextField outBox;
 	private JList<String> displayInventory;
 	private JList<String> displayRoomItems;
 	private JLabel displayActions;
@@ -34,7 +35,11 @@ public class UserInterface {
 		//displayActions.setText("What is your name?");
 		//String name = inputBox.getText();
 		
+		this.outBox = new JTextField();
+		outBox.setEditable(false);
+
 		Container cp = frm.getContentPane();
+		cp.add(outBox, BorderLayout.CENTER);
 		//cp.add(displayActions, BorderLayout.NORTH);
 		cp.add(inputBox, BorderLayout.SOUTH);
 		//cp.add(displayInventory, BorderLayout.WEST);
