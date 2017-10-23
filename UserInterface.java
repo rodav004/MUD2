@@ -10,6 +10,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JPanel;
+import java.awt.FlowLayout;
+
 public class UserInterface {
 	
 	private static Scanner input;
@@ -18,7 +21,8 @@ public class UserInterface {
 	private JList<String> displayInventory;
 	private JList<String> displayRoomItems;
 	private JLabel displayActions;
-
+	private JPanel inputPanel;
+	private JButton inputButton;
 	public JFrame getFrame() {
 		return this.frm;
 	}
@@ -35,13 +39,18 @@ public class UserInterface {
 		//displayActions.setText("What is your name?");
 		//String name = inputBox.getText();
 		
+		this.inputButton = new JButton("Submit");
 		this.outBox = new JTextField();
 		outBox.setEditable(false);
+
+		this.inputPanel = new JPanel(new FlowLayout());
+		inputPanel.add(inputBox);
+		inputPanel.add(inputButton);
 
 		Container cp = frm.getContentPane();
 		cp.add(outBox, BorderLayout.CENTER);
 		//cp.add(displayActions, BorderLayout.NORTH);
-		cp.add(inputBox, BorderLayout.SOUTH);
+		cp.add(inputPanel, BorderLayout.SOUTH);
 		//cp.add(displayInventory, BorderLayout.WEST);
 		//cp.add(displayRoomItems, BorderLayout.EAST);
 	}
