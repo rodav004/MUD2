@@ -13,25 +13,32 @@ import javax.swing.JList;
 public class UserInterface {
 	
 	private static Scanner input;
-	private static Scanner input;
 	private JTextField inputBox;
 	private JList<String> displayInventory;
 	private JList<String> displayRoomItems;
 	private JLabel displayActions;
-	
+
+	public JFrame getFrame() {
+		return this.frm;
+	}
+	private JFrame frm;
+
 	public UserInterface() {
-		Container cp = getContentPane();
-		cp.setLayout(new BorderLayout());
-		
+		this.frm = new JFrame("MUD");
+		frm.setSize(300,300);
+
+		this.inputBox = new JTextField();
+
 		inputBox.setEditable(true);
 		inputBox.setText("Enter command");
-		displayActions.setText("What is your name?");
-		String name = inputBox.getText();
+		//displayActions.setText("What is your name?");
+		//String name = inputBox.getText();
 		
-		cp.add(displayActions, BorderLayout.NORTH);
+		Container cp = frm.getContentPane();
+		//cp.add(displayActions, BorderLayout.NORTH);
 		cp.add(inputBox, BorderLayout.SOUTH);
-		cp.add(displayInventory, BorderLayout.WEST);
-		cp.add(displayRoomItems, BorderLayout.EAST);
+		//cp.add(displayInventory, BorderLayout.WEST);
+		//cp.add(displayRoomItems, BorderLayout.EAST);
 	}
 
 	public static void main(String[] args) {
@@ -61,10 +68,10 @@ public class UserInterface {
 			System.out.println(result);
 		}*/
 		UserInterface UI = new UserInterface();
-		UI.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		UI.setTitle(Game.room1.getName());
-		UI.setSize(500,250);
-		UI.setVisible(true);
+		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//UI.getFrame().setTitle(Game.room1.getName());
+		UI.getFrame().setSize(500,250);
+		UI.getFrame().setVisible(true);
 		
 	}
 
