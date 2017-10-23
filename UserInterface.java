@@ -43,7 +43,7 @@ public class UserInterface {
 		this.outBox = new JTextField();
 		outBox.setEditable(false);
 
-		this.inputPanel = new JPanel(new FlowLayout());
+		this.inputPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		inputPanel.add(inputBox);
 		inputPanel.add(inputButton);
 
