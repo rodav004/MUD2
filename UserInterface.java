@@ -51,7 +51,8 @@ public class UserInterface {
 		inputButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				String action = inputBox.getText();
-				Parse.parse(null, action);
+				String result = Parse.parse(null, action);
+				//displayActions.setText(result);
 			}
 		});
 
