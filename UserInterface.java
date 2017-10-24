@@ -13,6 +13,11 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class UserInterface {
 	
 	private static Scanner input;
@@ -42,6 +47,13 @@ public class UserInterface {
 		this.inputButton = new JButton("Submit");
 		this.outBox = new JTextField();
 		outBox.setEditable(false);
+		
+		inputButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				String action = inputBox.getText();
+				Parse.parse(null, action);
+			}
+		});
 
 		this.inputPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		inputPanel.add(inputBox);
