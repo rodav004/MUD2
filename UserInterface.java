@@ -56,6 +56,7 @@ public class UserInterface {
 					String name = inputBox.getText();
 					ArrayList<Item> inventory = new ArrayList<Item>();
 					Character playerOne = new Character(name, "You have no description yet", Game.room1, inventory);
+					displayActions.setText("Hello " + name + "! You are in " + Game.room1.getName());
 					inc++;
 				}
 				else {
