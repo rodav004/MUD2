@@ -28,6 +28,8 @@ public class UserInterface {
 	private JLabel displayActions;
 	private JPanel inputPanel;
 	private JButton inputButton;
+	//public int inc = 0;
+
 	public JFrame getFrame() {
 		return this.frm;
 	}
@@ -50,9 +52,17 @@ public class UserInterface {
 		
 		inputButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
+				if (inc = 0) {
+					String name = inputBox.getText();
+					ArrayList<Item> inventory = new ArrayList<Item>();
+					Character playerOne = new Character(name, "You have no description yet", Game.room1, inventory);
+					inc++;
+				}
+				else {
 				String action = inputBox.getText();
 				String result = Parse.parse(null, action);
-				//displayActions.setText(result);
+				displayActions.setText(result);
+				}
 			}
 		});
 
@@ -71,6 +81,7 @@ public class UserInterface {
 	public static void main(String[] args) {
 		
 		Game.start();
+		inc = 0;
 
 		/*input = new Scanner(System.in);
 		System.out.println("What is your name?");
