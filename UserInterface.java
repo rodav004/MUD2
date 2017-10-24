@@ -28,7 +28,7 @@ public class UserInterface {
 	private JLabel displayActions;
 	private JPanel inputPanel;
 	private JButton inputButton;
-	//public int inc = 0;
+	public int inc = 0;
 
 	public JFrame getFrame() {
 		return this.frm;
