@@ -1,9 +1,8 @@
 package mud;
-import java.util.Scanner;
+
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,14 +12,11 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class UserInterface {
 	
-	private static Scanner input;
 	private JTextField inputBox;
 	private JTextField outBox;
 	private JList<String> displayInventory;
@@ -28,7 +24,7 @@ public class UserInterface {
 	private JLabel displayActions;
 	private JPanel inputPanel;
 	private JButton inputButton;
-	public int inc = 0;
+	public static int inc = 0;
 
 	public JFrame getFrame() {
 		return this.frm;
@@ -39,10 +35,10 @@ public class UserInterface {
 		this.frm = new JFrame("MUD");
 		frm.setSize(300,300);
 
-		this.inputBox = new JTextField();
+		this.inputBox = new JTextField(10);
 
 		inputBox.setEditable(true);
-		inputBox.setText("Enter command");
+		inputBox.setText("Enter name");
 		//displayActions.setText("What is your name?");
 		//String name = inputBox.getText();
 		
@@ -52,17 +48,19 @@ public class UserInterface {
 		
 		inputButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				if (inc = 0) {
+				if (inc == 0) {
 					String name = inputBox.getText();
 					ArrayList<Item> inventory = new ArrayList<Item>();
 					Character playerOne = new Character(name, "You have no description yet", Game.room1, inventory);
-					displayActions.setText("Hello " + name + "! You are in " + Game.room1.getName());
+					outBox.setText("Hello " + name + "! You are in " + Game.room1.getName());
+					inputBox.setText("Enter command");
 					inc++;
 				}
 				else {
 				String action = inputBox.getText();
 				String result = Parse.parse(null, action);
 				displayActions.setText(result);
+				inputBox.setText("");
 				}
 			}
 		});
