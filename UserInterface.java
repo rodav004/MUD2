@@ -1,5 +1,6 @@
 package mud;
 
+import java.util.Scanner;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -82,7 +83,15 @@ public class UserInterface {
 		Game.start();
 		inc = 0;
 
-		/*input = new Scanner(System.in);
+		UserInterface UI = new UserInterface();
+		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//UI.getFrame().setTitle(Game.room1.getName());
+		UI.getFrame().setSize(500,250);
+		UI.getFrame().setVisible(true);
+		
+	}
+	public static void runCLI() {
+		Scanner input = new Scanner(System.in);
 		System.out.println("What is your name?");
 		String name = input.nextLine();
 		ArrayList<Item> inventory = new ArrayList<Item>();
@@ -103,13 +112,6 @@ public class UserInterface {
 			}
 			String result = Parser.parse(playerOne, command);
 			System.out.println(result);
-		}*/
-		UserInterface UI = new UserInterface();
-		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//UI.getFrame().setTitle(Game.room1.getName());
-		UI.getFrame().setSize(500,250);
-		UI.getFrame().setVisible(true);
-		
+		}
 	}
-
 }
