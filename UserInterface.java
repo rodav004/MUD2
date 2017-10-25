@@ -42,6 +42,43 @@ public class UserInterface {
 		inputBox.setText("Enter name");
 		//displayActions.setText("What is your name?");
 		//String name = inputBox.getText();
+				inputBox.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {
+				}
+				else {
+					inputBox.setText("");
+				}
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {	
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {
+				}
+				else {
+					inputBox.setText("");
+				}
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				if (!(inputBox.getText().equals("Enter name")
+					|| inputBox.getText().equals("Enter command")
+					|| inputBox.getText().equals(""))) {	
+				}
+				else if (inc == 0) {
+						inputBox.setText("Enter name");
+				}
+				else {
+					inputBox.setText("Enter command");
+				}
+			}
+		});
 		
 		this.inputButton = new JButton("Submit");
 		this.outBox = new JTextField();
