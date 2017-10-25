@@ -35,13 +35,13 @@ public class Character extends GameObject {
 		String result = null;
 		for (Item items: roomItems)
 		{
-			String roomItemName = items.name;
-			if (roomItemName.equals(itemName))
+			if (items.name.equals(itemName))
 			{
 				Item foundItem = items;
 				inventory.add(foundItem);
-				roomItems.remove(foundItem);
-				result = "Hooray! The item " + foundItem.getName() + " is now in your inventory. The description is: " + foundItem.getDescription() + ".";
+				location.items.remove(foundItem);
+				result = "Hooray! The item " + foundItem.getName() + " is now in your inventory. The description is: " + foundItem.getDescription();
+				break;
 			}
 			else result = "Sorry! The item is not in this room.";
 		}
@@ -56,14 +56,14 @@ public class Character extends GameObject {
 	{
 		String result = null;
 		ArrayList<Item> inventoryItems = new ArrayList<>(this.inventory);
-		ArrayList<Item> roomItems = new ArrayList<>(location.items);
 		for (Item items : inventoryItems) {
 			if (items.name.equals(itemName))
 			{
 				Item foundItem = items;
-				roomItems.add(foundItem);
+				location.items.add(foundItem);
 				inventory.remove(foundItem);
-				result = "The item " + itemName + " has been removed from your inventory and is in " + location.name + ".";
+				result = "The item " + itemName + " has been removed from your inventory and is in the " + location.name + ".";
+				break;
 			}
 			else result = "The item " + itemName + " is not in your inventory.";
 			}
@@ -78,7 +78,6 @@ public class Character extends GameObject {
 	public String move(String direction) {
 		String newRoom = null;
 		
-		direction = direction.toLowerCase();
 		if (direction.equals("north") || direction.equals("up")) {
 			Door exit = location.doors[0];
 			if (exit != null) {
