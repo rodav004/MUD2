@@ -58,7 +58,7 @@ public class UserInterface {
 				}
 				else {
 				String action = inputBox.getText();
-				String result = Parse.parse(null, action);
+				String result = Parser.parse(null, action);
 				displayActions.setText(result);
 				inputBox.setText("");
 				}
