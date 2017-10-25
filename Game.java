@@ -10,7 +10,7 @@ public class Game {
 		// Room 1
 		
 		// Room 1 items
-		Item torch = new Item("torch","This is a burning stick.");
+		Item torch = new Item("torch","A burning stick.");
 		Item apple = new Item("apple","A yummy red fruit.");
 		
 		//Room 1 attributes
@@ -21,7 +21,7 @@ public class Game {
 		Door[] doorsRoom1 = {null,null,null,null};
 		
 		//Room 1 constructed
-		Room room1 = new Room("Nice Room","This is a nice room.",itemsRoom1,peopleRoom1,doorsRoom1);
+		room1 = new Room("Nice Room","This is a nice room.",itemsRoom1,peopleRoom1,doorsRoom1);
 		
 		//Character Inventory
 		ArrayList<Item> inventory = new ArrayList<>();
@@ -35,7 +35,7 @@ public class Game {
 		//Room 2
 		
 		//Room 2 Items
-		Item rock = new Item("rock","It's grayish and hard.");
+		Item rock = new Item("rock","Grayish and hard.");
 		Item pen = new Item("pen","Useful for writing.");
 		
 		//Room 2 attributes
@@ -59,6 +59,5 @@ public class Game {
 		
 	}
 	
-
 
 }
