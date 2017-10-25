@@ -1,31 +1,29 @@
 package mud;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Container;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import java.awt.FlowLayout;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 
 public class UserInterface {
 	
 	private JTextField inputBox;
 	private JTextField outBox;
-	private JList<String> displayInventory;
-	private JList<String> displayRoomItems;
-	private JLabel displayActions;
 	private JPanel inputPanel;
 	private JButton inputButton;
 	public static int inc = 0;
+	private Character playerOne;
 
 	public JFrame getFrame() {
 		return this.frm;
@@ -34,7 +32,7 @@ public class UserInterface {
 
 	public UserInterface() {
 		this.frm = new JFrame("MUD");
-		frm.setSize(300,300);
+		frm.setSize(500,300);
 
 		this.inputBox = new JTextField(10);
 
@@ -89,15 +87,15 @@ public class UserInterface {
 				if (inc == 0) {
 					String name = inputBox.getText();
 					ArrayList<Item> inventory = new ArrayList<Item>();
-					Character playerOne = new Character(name, "You have no description yet", Game.room1, inventory);
+					playerOne = new Character(name, "You have no description yet", Game.room1, inventory);
 					outBox.setText("Hello " + name + "! You are in " + Game.room1.getName());
 					inputBox.setText("Enter command");
 					inc++;
 				}
 				else {
 				String action = inputBox.getText();
-				String result = Parser.parse(null, action);
-				displayActions.setText(result);
+				String result = Parser.parse(playerOne, action);
+				outBox.setText(result);
 				inputBox.setText("");
 				}
 			}
@@ -120,15 +118,7 @@ public class UserInterface {
 		Game.start();
 		inc = 0;
 
-		UserInterface UI = new UserInterface();
-		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//UI.getFrame().setTitle(Game.room1.getName());
-		UI.getFrame().setSize(500,250);
-		UI.getFrame().setVisible(true);
-		
-	}
-	public static void runCLI() {
-		Scanner input = new Scanner(System.in);
+		/*input = new Scanner(System.in);
 		System.out.println("What is your name?");
 		String name = input.nextLine();
 		ArrayList<Item> inventory = new ArrayList<Item>();
@@ -149,6 +139,13 @@ public class UserInterface {
 			}
 			String result = Parser.parse(playerOne, command);
 			System.out.println(result);
-		}
+		}*/
+		UserInterface UI = new UserInterface();
+		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//UI.getFrame().setTitle(Game.room1.getName());
+		UI.getFrame().setSize(750,250);
+		UI.getFrame().setVisible(true);
+		
 	}
+
 }
