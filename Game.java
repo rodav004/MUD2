@@ -1,4 +1,5 @@
 package mud;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Game {
@@ -14,17 +15,17 @@ public class Game {
 		Item apple = new Item("apple","A yummy red fruit.");
 		
 		//Room 1 attributes
-		ArrayList<Item> itemsRoom1 = new ArrayList<>();
+		List<Item> itemsRoom1 = new ArrayList<>();
 			itemsRoom1.add(apple);
 			itemsRoom1.add(torch);
-		ArrayList<Character> peopleRoom1 = new ArrayList<>();
+		List<Character> peopleRoom1 = new ArrayList<>();
 		Door[] doorsRoom1 = {null,null,null,null};
 		
 		//Room 1 constructed
 		Room room1 = new Room("Nice Room","This is a nice room.",itemsRoom1,peopleRoom1,doorsRoom1);
 		
 		//Character Inventory
-		ArrayList<Item> inventory = new ArrayList<>();
+		List<Item> inventory = new ArrayList<>();
 		
 		//Character constructed
 		person = new Character("Bob","Bob has brown hair.",room1,inventory);
@@ -39,10 +40,10 @@ public class Game {
 		Item pen = new Item("pen","Useful for writing.");
 		
 		//Room 2 attributes
-		ArrayList<Item> itemsRoom2 = new ArrayList<>();
+		List<Item> itemsRoom2 = new ArrayList<>();
 			itemsRoom2.add(rock);
 			itemsRoom2.add(pen);
-		ArrayList<Character> peopleRoom2 = new ArrayList<>();
+		List<Character> peopleRoom2 = new ArrayList<>();
 		Door[] doorsRoom2 = {null,null,null,null};
 		
 		//Room 2 constructed

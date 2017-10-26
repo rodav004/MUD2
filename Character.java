@@ -1,11 +1,12 @@
 package mud;
+import java.util.List;
 import java.util.ArrayList;
 
 public class Character extends GameObject {
 	Room location;
-	ArrayList<Item> final inventory = new ArrayList<>();
+	List<Item> final inventory = new ArrayList<>();
 	
-	public Character(String name, String description, Room location, ArrayList<Item> inventory) {
+	public Character(String name, String description, Room location, List<Item> inventory) {
 		this.description = description;
 		this.name = name;
 		this.location = location;
@@ -13,11 +14,11 @@ public class Character extends GameObject {
 	}
 	/**
 	 * 
-	 * @return an ArrayList of the names of the items in inventory
+	 * @return an List of the names of the items in inventory
 	 */
-	public ArrayList<String> getItems() {
-		ArrayList<Item> items = this.inventory;
-		ArrayList<String> itemNames = new ArrayList<>();
+	public List<String> getItems() {
+		List<Item> items = this.inventory;
+		List<String> itemNames = new ArrayList<>();
 		for (Item item : items) {
 			itemNames.add(item.name);
 		}
@@ -31,7 +32,7 @@ public class Character extends GameObject {
 	
 	public String addItem(String itemName)
 	{
-		ArrayList<Item> roomItems = new ArrayList<>(location.items);
+		List<Item> roomItems = new ArrayList<>(location.items);
 		String result = null;
 		if (roomItems.isEmpty()) {
 			result = "Sorry! The item is not in this room.";
@@ -58,8 +59,8 @@ public class Character extends GameObject {
 	public String removeItem(String itemName)
 	{
 		String result = null;
-		ArrayList<Item> inventoryItems = new ArrayList<>(this.inventory);
-		ArrayList<Item> roomItems = new ArrayList<>(location.items);
+		List<Item> inventoryItems = new ArrayList<>(this.inventory);
+		List<Item> roomItems = new ArrayList<>(location.items);
 		if (inventory.isEmpty()) {
 			result = "Sorry, your inventory is empty.";
 		}
@@ -84,48 +85,41 @@ public class Character extends GameObject {
 	 */
 	public String move(String direction) {
 		String newRoom = null;
-		
-		if (direction.equals("north") || direction.equals("up")) {
-			Door exit = location.doors[0];
-			if (exit != null) {
-				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-				this.location = exit.room;
-			}
-			else {
-				newRoom = "There is not a door in that direction!";
-			}
+
+		direction = direction.toLowerCase();
+		Door exit = null;
+		boolean validDirection = true;
+
+		switch (direction) {
+			case "up":
+			case "north":
+				exit = location.doors[0];
+				break;
+			case "down":
+			case "south":
+				exit = this.location.doors[2];
+				break;
+			case "right":
+			case "east":
+				exit = location.doors[1];
+				break;
+			case "left":
+			case "west":
+				exit = location.doors[3];
+				break;
+			default:
+				validDirection = false;
+				break;
 		}
-		else if (direction.equals("south") || direction.equals("down")) {
-			Door exit = this.location.doors[2];
-			if (exit != null) {
-				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-				this.location = exit.room;
-			}
-			else {
-				newRoom = "There is not a door in that direction!";
-			}
+
+		if (validDirection && exit != null) {
+			newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+			this.location = exit.room;
 		}
-		else if (direction.equals("east") || direction.equals("right")) {
-			Door exit = location.doors[1];
-			if (exit != null) {
-				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-				this.location = exit.room;
-			}
-			else {
-				newRoom = "There is not a door in that direction!";
-			}
+		else if (validDirection && exit == null) {
+			newRoom = "There is no door in that direction!";
 		}
-		else if (direction.equals("west") || direction.equals("left")) {
-			Door exit = location.doors[3];
-			if (exit != null) {
-				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-				this.location = exit.room;
-			}
-			else {
-				newRoom = "There is not a door in that direction!";
-			}
-		}
-		else{
+		else if (!validDirection) {
 			newRoom = "Sorry, that is not a valid direction!";
 		}
 		
