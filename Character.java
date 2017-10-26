@@ -34,8 +34,8 @@ public class Character extends GameObject {
 		ArrayList<Item> roomItems = new ArrayList<>(location.items);
 		String result = null;
 		if (roomItems.isEmpty()) {
--			result = "Sorry! The item is not in this room.";
--		}
+			result = "Sorry! The item is not in this room.";
+		}
 		for (Item items: roomItems)
 		{
 			if (items.name.equals(itemName))
@@ -60,9 +60,9 @@ public class Character extends GameObject {
 		String result = null;
 		ArrayList<Item> inventoryItems = new ArrayList<>(this.inventory);
 		ArrayList<Item> roomItems = new ArrayList<>(location.items);
--		if (inventory.isEmpty()) {
--			result = "Sorry, your inventory is empty.";
--		}
+		if (inventory.isEmpty()) {
+			result = "Sorry, your inventory is empty.";
+		}
 		for (Item items : inventoryItems) {
 			if (items.name.equals(itemName))
 			{
