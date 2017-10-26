@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Character extends GameObject {
 	Room location;
-	List<Item> final inventory = new ArrayList<>();
+	final List<Item> inventory = new ArrayList<>();
 	
 	public Character(String name, String description, Room location, List<Item> inventory) {
 		this.description = description;
