@@ -53,7 +53,7 @@ public class Game {
 		Door[] doorsRoom3 = {null,null,null,null};
 		
 		//Room 3 constructed
-		Room room3 = new Room("X-lab","You aren't going to get any work done.",itemsRoom3,peopleRoom3,doorsRoom3);
+		Room room3 = new Room("X-lab","No work gets done in here.",itemsRoom3,peopleRoom3,doorsRoom3);
 		
 		//Construct doors
 		Door door1 = new Door(room2);
