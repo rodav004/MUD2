@@ -3,13 +3,13 @@ import java.util.ArrayList;
 
 public class Character extends GameObject {
 	Room location;
-	ArrayList<Item> inventory;
+	ArrayList<Item> final inventory = new ArrayList<>();
 	
 	public Character(String name, String description, Room location, ArrayList<Item> inventory) {
 		this.description = description;
 		this.name = name;
 		this.location = location;
-		this.inventory = inventory;
+		this.inventory.addAll(inventory);
 	}
 	/**
 	 * 
