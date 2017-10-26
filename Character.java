@@ -132,6 +132,9 @@ public class Character extends GameObject {
 		return newRoom;
 		
 	}
-	
+
+	public String look() {
+		return location.getDescription();
+	}
 	
 }
