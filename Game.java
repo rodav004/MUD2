@@ -2,7 +2,7 @@ package mud;
 import java.util.ArrayList;
 
 public class Game {
-	public static Character person;
+
 	public static Room room1;
 	
 	public static void start() {
@@ -23,15 +23,7 @@ public class Game {
 		//Room 1 constructed
 		room1 = new Room("Nice Room","This is a nice room.",itemsRoom1,peopleRoom1,doorsRoom1);
 		
-		//Character Inventory
-		ArrayList<Item> inventory = new ArrayList<>();
-		
-		//Character constructed
-		person = new Character("Bob","Bob has brown hair.",room1,inventory);
-		
-		//Character put in room
-		peopleRoom1.add(person);
-		
+
 		//Room 2
 		
 		//Room 2 Items
@@ -48,7 +40,7 @@ public class Game {
 		//Room 2 constructed
 		Room room2 = new Room("Okay Room","This room is okay.",itemsRoom2,peopleRoom2,doorsRoom2);
 		
-		//Construct a door
+		//Construct doors
 		Door door1 = new Door(room2);
 		Door door2 = new Door(room1);
 		
