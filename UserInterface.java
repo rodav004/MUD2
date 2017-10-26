@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
 public class UserInterface {
 	
 	private JTextField inputBox;
@@ -38,24 +37,13 @@ public class UserInterface {
 
 		inputBox.setEditable(true);
 		inputBox.setText("Enter name");
-		//displayActions.setText("What is your name?");
-		//String name = inputBox.getText();
-				inputBox.addMouseListener(new MouseListener() {
-			@Override
+		inputBox.addMouseListener(new MouseListener() {
 			public void mouseClicked(MouseEvent e) {
-				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {
-				}
+				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {	}
 				else {
 					inputBox.setText("");
 				}
 			}
-			@Override
-			public void mousePressed(MouseEvent e) {	
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-			@Override
 			public void mouseEntered(MouseEvent e) {
 				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {
 				}
@@ -63,12 +51,10 @@ public class UserInterface {
 					inputBox.setText("");
 				}
 			}
-			@Override
 			public void mouseExited(MouseEvent e) {
 				if (!(inputBox.getText().equals("Enter name")
 					|| inputBox.getText().equals("Enter command")
-					|| inputBox.getText().equals(""))) {	
-				}
+					|| inputBox.getText().equals(""))) { }
 				else if (inc == 0) {
 						inputBox.setText("Enter name");
 				}
@@ -76,6 +62,8 @@ public class UserInterface {
 					inputBox.setText("Enter command");
 				}
 			}
+			public void mousePressed(MouseEvent e) { }
+			public void mouseReleased(MouseEvent e) { }
 		});
 		
 		this.inputButton = new JButton("Submit");
@@ -116,7 +104,6 @@ public class UserInterface {
 	public static void main(String[] args) {
 		
 		Game.start();
-		inc = 0;
 
 		/*input = new Scanner(System.in);
 		System.out.println("What is your name?");
