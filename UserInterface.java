@@ -33,6 +33,13 @@ public class UserInterface {
 		this.frm = new JFrame("MUD");
 		frm.setSize(500,300);
 
+		/*ArrayList<String> roomItemName = playerOne.location.getItems();
+		ArrayList<String> inventoryItemName = playerOne.getItems();
+		String[] roomItNa = (String[]) roomItemName.toArray();
+		String[] inventoryItNa = (String[])inventoryItemName.toArray();
+		roomItems = new JList<String>(roomItNa);
+		inventoryItems = new JList<String>(inventoryItNa); */
+		
 		this.inputBox = new JTextField(10);
 
 		inputBox.setEditable(true);
