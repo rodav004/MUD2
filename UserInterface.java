@@ -3,13 +3,15 @@ package mud;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import javax.swing.BoxLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
-import javax.swing.JList;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.DefaultListModel;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -31,8 +33,15 @@ public class UserInterface {
 	private JPanel roomItemPanel;
 	private JButton roomItemOne = new JButton();
 	private JButton roomItemTwo = new JButton();
-	private JTextField inventoryItems = new JTextField();
 	private JLabel roomName = new JLabel();
+	
+	private JPanel inventoryPanel;
+	private JLabel inventoryItemsLabel = new JLabel("Inventory");
+	private JButton inventoryItemOne = new JButton("Apple");
+	private JButton inventoryItemTwo = new JButton("Torch");
+	private JButton inventoryItemThree = new JButton("Rock");
+	private JButton inventoryItemFour = new JButton("Pen");
+	
 
 	public JFrame getFrame() {
 		return this.frm;
@@ -90,6 +99,11 @@ public class UserInterface {
 		outBox.setEditable(false);
 		roomItemOne.hide();
 		roomItemTwo.hide();
+		inventoryItemsLabel.hide();
+		inventoryItemOne.hide();
+		inventoryItemTwo.hide();
+		inventoryItemThree.hide();
+		inventoryItemFour.hide(); 
 		
 			inputButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -103,6 +117,7 @@ public class UserInterface {
 					roomItemTwo.setText(playerOne.location.getSingularItem(1));
 					roomItemOne.show();
 					roomItemTwo.show();
+					inventoryItemsLabel.show();
 					inputBox.setText("Enter command");
 					inc++;
 					}
@@ -125,19 +140,60 @@ public class UserInterface {
 			}
 		}); 		
 
+		roomItemOne.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String action = Parse.parse(playerOne, "get " + roomItemOne.getText());
+				outBox.setText(action);
+				if (playerOne.location.equals(Game.room1)) {
+					inventoryItemOne.show();
+					roomItemOne.hide();
+				}
+				if (playerOne.location.equals(Game.room2)) {
+					inventoryItemThree.show();
+					roomItemOne.hide();
+				}
+			}
+		});
+		
+		roomItemTwo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String action = Parse.parse(playerOne, "get " + roomItemTwo.getText());
+				outBox.setText(action);
+				if (playerOne.location.equals(Game.room1)) {
+					inventoryItemTwo.show();
+					roomItemTwo.hide();
+				}
+				if (playerOne.location.equals(Game.room2)) {
+					inventoryItemThree.show();
+					roomItemTwo.hide();
+				}
+			}
+		});
+		
+			
 		this.inputPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		inputPanel.add(inputBox);
 		inputPanel.add(inputButton);
 		
-		roomItemPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		roomItemPanel = new JPanel();
+		roomItemPanel.setLayout(new BoxLayout(roomItemPanel, BoxLayout.Y_AXIS));
 		roomItemPanel.add(roomName);
 		roomItemPanel.add(roomItemOne);
 		roomItemPanel.add(roomItemTwo);
+		
+		inventoryPanel = new JPanel();
+		inventoryPanel.setLayout(new BoxLayout(inventoryPanel, BoxLayout.Y_AXIS));
+		inventoryPanel.add(inventoryItemsLabel);
+		inventoryPanel.add(inventoryItemOne);
+		inventoryPanel.add(inventoryItemTwo);
+		inventoryPanel.add(inventoryItemThree);
+		inventoryPanel.add(inventoryItemFour); 
 		
 		Container cp = frm.getContentPane();
 		cp.add(outBox, BorderLayout.CENTER);
 		cp.add(inputPanel, BorderLayout.SOUTH);
 		cp.add(roomItemPanel, BorderLayout.WEST);
+		cp.add(inventoryPanel, BorderLayout.EAST);
 	}
 
 	public static void main(String[] args) {
