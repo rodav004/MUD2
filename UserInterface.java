@@ -99,6 +99,7 @@ public class UserInterface {
 		this.inputButton = new JButton("Submit");
 		this.outBox = new JTextField();
 		outBox.setEditable(false);
+		instructions.setEditable(false);
 		
 		roomItemOne.hide();
 		roomItemTwo.hide();
