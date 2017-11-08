@@ -181,7 +181,7 @@ public class UserInterface {
 					if (action.contains("pen")) {
 						inventoryItemFour.hide();
 						if (playerOne.location.equals(Game.room2)) {
-							roomItemFour.hide();
+							roomItemFour.show();
 						}
 					}
 				}
