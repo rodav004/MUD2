@@ -95,9 +95,9 @@ public class UserInterface {
 					roomItemOne.show();
 					roomItemTwo.show();
 					inventoryItemsLabel.show();
-                    inputBoxPlaceholder = "Enter command";
+                                        inputBoxPlaceholder = "Enter command";
 					inc++;
-					}
+				}
 			else {
 				String action = inputBox.getText();
 				String result = Parser.parse(playerOne, action);
