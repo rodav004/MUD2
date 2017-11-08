@@ -3,6 +3,8 @@ package mud;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,6 +32,7 @@ public class UserInterface {
 	}
 	private JFrame frm;
 
+	private String inputBoxPlaceholder = "Enter name";
 	public UserInterface() {
 		this.frm = new JFrame("MUD");
 		frm.setSize(500,300);
@@ -38,42 +41,15 @@ public class UserInterface {
 
 		inputBox.setEditable(true);
 		inputBox.setText("Enter name");
-		//displayActions.setText("What is your name?");
-		//String name = inputBox.getText();
-				inputBox.addMouseListener(new MouseListener() {
+		inputBox.addFocusListener(new FocusAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {
-				}
-				else {
-					inputBox.setText("");
-				}
+			public void focusGained(FocusEvent e) {
+				inputBox.setText("");
 			}
 			@Override
-			public void mousePressed(MouseEvent e) {	
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {
-				}
-				else {
-					inputBox.setText("");
-				}
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if (!(inputBox.getText().equals("Enter name")
-					|| inputBox.getText().equals("Enter command")
-					|| inputBox.getText().equals(""))) {	
-				}
-				else if (inc == 0) {
-						inputBox.setText("Enter name");
-				}
-				else {
-					inputBox.setText("Enter command");
+			public void focusLost(FocusEvent e) {
+				if (inputBox.getText().equals("")) {
+					inputBox.setText(inputBoxPlaceholder);
 				}
 			}
 		});
@@ -89,22 +65,23 @@ public class UserInterface {
 					ArrayList<Item> inventory = new ArrayList<Item>();
 					playerOne = new Character(name, "You have no description yet", Game.room1, inventory);
 					outBox.setText("Hello " + name + "! You are in the " + Game.room1.getName());
-					inputBox.setText("Enter command");
+					inputBoxPlaceholder = "Enter command";
 					inc++;
 				}
 				else {
-				String action = inputBox.getText();
-				String result = Parser.parse(playerOne, action);
-				outBox.setText(result);
-				inputBox.setText("");
+					String action = inputBox.getText();
+					String result = Parser.parse(playerOne, action);
+					outBox.setText(result);
 				}
+
+				inputBox.setText(inputBoxPlaceholder);
 			}
 		});
 
 		this.inputPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		inputPanel.add(inputBox);
 		inputPanel.add(inputButton);
-
+		inputButton.requestFocusInWindow();
 		Container cp = frm.getContentPane();
 		cp.add(outBox, BorderLayout.CENTER);
 		//cp.add(displayActions, BorderLayout.NORTH);
