@@ -100,7 +100,7 @@ public class UserInterface {
 					}
 			else {
 				String action = inputBox.getText();
-				String result = Parse.parse(playerOne, action);
+				String result = Parser.parse(playerOne, action);
 				if (playerOne.location.equals(Game.room1)) {
 					roomName.setText(Game.room1.getName());
 					roomItemOne.setText(playerOne.location.getSingularItem(0));
@@ -121,7 +121,7 @@ public class UserInterface {
 
 		roomItemOne.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String action = Parse.parse(playerOne, "get " + roomItemOne.getText());
+				String action = Parser.parse(playerOne, "get " + roomItemOne.getText());
 				outBox.setText(action);
 				if (playerOne.location.equals(Game.room1)) {
 					inventoryItemOne.show();
@@ -136,7 +136,7 @@ public class UserInterface {
 		
 		roomItemTwo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String action = Parse.parse(playerOne, "get " + roomItemTwo.getText());
+				String action = Parser.parse(playerOne, "get " + roomItemTwo.getText());
 				outBox.setText(action);
 				if (playerOne.location.equals(Game.room1)) {
 					inventoryItemTwo.show();
