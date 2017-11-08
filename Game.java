@@ -2,8 +2,10 @@ package mud;
 import java.util.ArrayList;
 
 public class Game {
-	public static Character person;
+
 	public static Room room1;
+	public static Room room2;
+	public static Room room3;
 	
 	public static void start() {
 		
@@ -23,15 +25,7 @@ public class Game {
 		//Room 1 constructed
 		room1 = new Room("Nice Room","This is a nice room.",itemsRoom1,peopleRoom1,doorsRoom1);
 		
-		//Character Inventory
-		ArrayList<Item> inventory = new ArrayList<>();
-		
-		//Character constructed
-		person = new Character("Bob","Bob has brown hair.",room1,inventory);
-		
-		//Character put in room
-		peopleRoom1.add(person);
-		
+
 		//Room 2
 		
 		//Room 2 Items
@@ -46,16 +40,35 @@ public class Game {
 		Door[] doorsRoom2 = {null,null,null,null};
 		
 		//Room 2 constructed
-		Room room2 = new Room("Okay Room","This room is okay.",itemsRoom2,peopleRoom2,doorsRoom2);
+		room2 = new Room("Okay Room","This room is okay.",itemsRoom2,peopleRoom2,doorsRoom2);
 		
-		//Construct a door
+		
+		//Room 3
+		
+		//Room 3 Items
+		Item coffee = new Item("coffee","A paper cup half full of lukewarm coffee.");
+		
+		//Room 3 attributes
+		ArrayList<Item> itemsRoom3 = new ArrayList<>();
+			itemsRoom3.add(coffee);
+		ArrayList<Character> peopleRoom3 = new ArrayList<>();
+		Door[] doorsRoom3 = {null,null,null,null};
+		
+		//Room 3 constructed
+		room3 = new Room("X-lab","No work gets done in here.",itemsRoom3,peopleRoom3,doorsRoom3);
+		
+		//Construct doors
 		Door door1 = new Door(room2);
 		Door door2 = new Door(room1);
 		
+		Door door3 = new Door(room3);
+		Door door4 = new Door(room1);
+		
 		//Assign doors to rooms
 		doorsRoom1[2] = door1;
+		doorsRoom1[1] = door3;
 		doorsRoom2[0] = door2;
-		
+		doorsRoom3[3] = door4;
 		
 	}
 	

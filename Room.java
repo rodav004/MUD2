@@ -13,4 +13,8 @@ public class Room extends GameObject {
 		this.characters = characters;
 		this.doors = doors;
 	}
+
+public String getSingularItem(int index) {
+		return items.get(index).getName();
+	}
 }
