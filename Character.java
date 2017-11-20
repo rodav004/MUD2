@@ -60,17 +60,13 @@ public class Character extends GameObject {
 	{
 		String result = null;
 		List<Item> inventoryItems = new ArrayList<>(this.inventory);
-		List<Item> roomItems = new ArrayList<>(location.items);
-		if (inventory.isEmpty()) {
-			result = "Sorry, your inventory is empty.";
-		}
 		for (Item items : inventoryItems) {
 			if (items.name.equals(itemName))
 			{
 				Item foundItem = items;
 				location.items.add(foundItem);
 				inventory.remove(foundItem);
-				result = "The item " + itemName + " has been removed from your inventory and is in " + location.name + ".";
+				result = "The item " + itemName + " has been removed from your inventory and is in the " + location.name + ".";
 				break;
 			}
 			else result = "The item " + itemName + " is not in your inventory.";
@@ -111,7 +107,7 @@ public class Character extends GameObject {
 				validDirection = false;
 				break;
 		}
-
+		
 		if (validDirection && exit != null) {
 			newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
 			this.location = exit.room;

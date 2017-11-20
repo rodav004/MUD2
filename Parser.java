@@ -9,7 +9,7 @@ public class Parser {
  * @return a String saying the result of the action
  */	
 	public static String parse(Character playerOne, String input) {
-		String[] splitStrings = input.toLowerCase().split(" ");
+		String[] splitStrings = input.split(" ");
 		String r = "test";
 		
 		if (splitStrings[0].equals("exit")) {
@@ -25,6 +25,9 @@ public class Parser {
 		}
 		else if (splitStrings[0].equals("drop")) {
 			r = playerOne.removeItem(splitStrings[1]);
+		}
+		else if (splitStrings[0].equals("look")) {
+			r = playerOne.look();
 		}
 		else {
 			r = "Oops! I don't know what you're trying to say!";
