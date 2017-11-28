@@ -8,7 +8,7 @@ public class Parser {
  * @param input the action to be done
  * @return a String saying the result of the action
  */	
-	public static String parse(Character playerOne, String input) {
+	public static String parse(Player playerOne, String input) {
 		String[] splitStrings = input.split(" ");
 		String r = "test";
 		
