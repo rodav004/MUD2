@@ -1,7 +1,5 @@
 package mud;
 
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -12,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import javax.swing.JTextArea;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -29,24 +26,22 @@ public class UserInterface {
 	private JPanel inputPanel;
 	private JButton inputButton;
 	public static int inc = 0;
-	private Character playerOne;
+	private Player playerOne;
 	
 	private JPanel roomItemPanel;
-	private JButton roomItemOne = new JButton("apple");
-	private JButton roomItemTwo = new JButton("torch");
-	private JButton roomItemThree = new JButton("rock");
-	private JButton roomItemFour = new JButton("pen");
+	private JButton roomItemOne = new JButton();
+	private JButton roomItemTwo = new JButton();
 	private JLabel roomName = new JLabel();
 	
 	private JPanel inventoryPanel;
 	private JLabel inventoryItemsLabel = new JLabel("Inventory");
-	private JButton inventoryItemOne = new JButton("apple");
-	private JButton inventoryItemTwo = new JButton("torch");
-	private JButton inventoryItemThree = new JButton("rock");
-	private JButton inventoryItemFour = new JButton("pen");
+	private JButton inventoryItemOne = new JButton("Apple");
+	private JButton inventoryItemTwo = new JButton("Torch");
+	private JButton inventoryItemThree = new JButton("Rock");
+	private JButton inventoryItemFour = new JButton("Pen");
+	private ArrayList<JButton> inventoryItemsArray = new ArrayList<JButton>();
 	
-	private JTextArea instructions = new JTextArea();
-	
+
 	public JFrame getFrame() {
 		return this.frm;
 	}
@@ -70,26 +65,16 @@ public class UserInterface {
 					inputBox.setText("");
 				}
 			}
-			@Override
-			public void mousePressed(MouseEvent e) {	
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
+			@Override public void mousePressed(MouseEvent e) { }
+			@Override public void mouseReleased(MouseEvent e) { }
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {
-				}
-				else {
-					inputBox.setText("");
-				}
+				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) { }
+				else {	inputBox.setText("");	}
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				if (!(inputBox.getText().equals("Enter name")
-					|| inputBox.getText().equals("Enter command")
-					|| inputBox.getText().equals(""))) {	
-				}
+				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command") || inputBox.getText().equals(""))) { }
 				else if (inc == 0) {
 						inputBox.setText("Enter name");
 				}
@@ -101,31 +86,24 @@ public class UserInterface {
 		this.inputButton = new JButton("Submit");
 		this.outBox = new JTextField();
 		outBox.setEditable(false);
-		instructions.setEditable(false);
-		
 		roomItemOne.hide();
 		roomItemTwo.hide();
-		roomItemThree.hide();
-		roomItemFour.hide();
 		inventoryItemsLabel.hide();
 		inventoryItemOne.hide();
 		inventoryItemTwo.hide();
 		inventoryItemThree.hide();
 		inventoryItemFour.hide(); 
 		
-		String move = "To change rooms: move + north/south/east/west";
-		String getItem = "To add an item to inventory, click the button";
-		String dropItem = "To drop an item: remove + item name";
-		instructions.setText(move + "\n" + getItem + "\n" + dropItem);
-		outBox.setText("Welcome to our unnamed game!");
 			inputButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (inc == 0) {
 					String name = inputBox.getText();
 					ArrayList<Item> inventory = new ArrayList<Item>();
-					playerOne = new Character(name, "You have no description yet", Game.room1, inventory);
+					playerOne = new Player(name, "You have no description yet", Game.room1, inventory);
 					outBox.setText("Hello " + name + "! You are in the " + Game.room1.getName());
 					roomName.setText(Game.room1.getName());
+					roomItemOne.setText(playerOne.location.getSingularItem(0));
+					roomItemTwo.setText(playerOne.location.getSingularItem(1));
 					roomItemOne.show();
 					roomItemTwo.show();
 					inventoryItemsLabel.show();
@@ -137,55 +115,13 @@ public class UserInterface {
 				String result = Parser.parse(playerOne, action);
 				if (playerOne.location.equals(Game.room1)) {
 					roomName.setText(Game.room1.getName());
-					roomItemThree.hide();
-					roomItemFour.hide();
-					if (inventoryItemOne.isVisible()) {
-						roomItemOne.hide();
-					}
-					else roomItemOne.show();
-					if (inventoryItemTwo.isVisible()) {
-						roomItemTwo.hide();
-					}
-					else roomItemTwo.show();
+					roomItemOne.setText(playerOne.location.getSingularItem(0));
+					roomItemTwo.setText(playerOne.location.getSingularItem(1));
 				}
-				if (playerOne.location.equals(Game.room2)) {
+				else {
 					roomName.setText(Game.room2.getName());
-					roomItemOne.hide();
-					roomItemTwo.hide();
-					if (inventoryItemThree.isVisible()) {
-						roomItemThree.hide();
-					}
-					else roomItemThree.show();
-					if (inventoryItemFour.isVisible()) {
-						roomItemFour.hide();
-					}
-					else roomItemFour.show();
-				}
-				if (action.contains("drop")) {
-					if (action.contains("apple")) {
-						inventoryItemOne.hide();
-						if (playerOne.location.equals(Game.room1)) {
-						roomItemOne.show();
-						}
-					}
-					if (action.contains("torch")) {
-						inventoryItemTwo.hide();
-						if (playerOne.location.equals(Game.room1)) {
-							roomItemTwo.show();
-						}
-					}
-					if (action.contains("rock")) {
-						inventoryItemThree.hide();
-						if (playerOne.location.equals(Game.room2)) {
-							roomItemThree.show();
-						}
-					}
-					if (action.contains("pen")) {
-						inventoryItemFour.hide();
-						if (playerOne.location.equals(Game.room2)) {
-							roomItemFour.show();
-						}
-					}
+					roomItemOne.setText(playerOne.location.getSingularItem(0));
+					roomItemTwo.setText(playerOne.location.getSingularItem(1));
 				}
 				outBox.setText(result);
 				inputBox.setText("");
@@ -193,12 +129,23 @@ public class UserInterface {
 			}
 		}); 		
 
+			//change all the inventoryItem.show/hide to adding or subtracting from an arraylist
+		
 		roomItemOne.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int i = 0;
 				String action = Parser.parse(playerOne, "get " + roomItemOne.getText());
 				outBox.setText(action);
-				roomItemOne.hide();
-				inventoryItemOne.show();
+				if (playerOne.location.equals(Game.room1)) {
+					inventoryItemsArray.add(roomItemOne);
+					inventoryItemsArray.get(i).show();
+					//inventoryItemOne.show();
+					roomItemOne.hide();
+				}
+				if (playerOne.location.equals(Game.room2)) {
+					inventoryItemThree.show();
+					roomItemOne.hide();
+				}
 			}
 		});
 		
@@ -206,26 +153,14 @@ public class UserInterface {
 			public void actionPerformed(ActionEvent e) {
 				String action = Parser.parse(playerOne, "get " + roomItemTwo.getText());
 				outBox.setText(action);
-				roomItemTwo.hide();
-				inventoryItemTwo.show();
-			}
-		});
-		
-		roomItemThree.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String action = Parser.parse(playerOne, "get " + roomItemThree.getText());
-				outBox.setText(action);
-				roomItemThree.hide();
-				inventoryItemThree.show();
-			}
-		});
-		
-		roomItemFour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String action = Parser.parse(playerOne, "get " + roomItemFour.getText());
-				outBox.setText(action);
-				roomItemFour.hide();
-				inventoryItemFour.show();
+				if (playerOne.location.equals(Game.room1)) {
+					inventoryItemTwo.show();
+					roomItemTwo.hide();
+				}
+				if (playerOne.location.equals(Game.room2)) {
+					inventoryItemThree.show();
+					roomItemTwo.hide();
+				}
 			}
 		});
 		
@@ -239,8 +174,6 @@ public class UserInterface {
 		roomItemPanel.add(roomName);
 		roomItemPanel.add(roomItemOne);
 		roomItemPanel.add(roomItemTwo);
-		roomItemPanel.add(roomItemThree);
-		roomItemPanel.add(roomItemFour);
 		
 		inventoryPanel = new JPanel();
 		inventoryPanel.setLayout(new BoxLayout(inventoryPanel, BoxLayout.Y_AXIS));
@@ -248,14 +181,17 @@ public class UserInterface {
 		inventoryPanel.add(inventoryItemOne);
 		inventoryPanel.add(inventoryItemTwo);
 		inventoryPanel.add(inventoryItemThree);
-		inventoryPanel.add(inventoryItemFour); 
+		inventoryPanel.add(inventoryItemFour);
+		for (int j=0;j<inventoryItemsArray.size();j++) {
+			inventoryPanel.add(inventoryItemsArray.get(j));
+		}
+
 		
 		Container cp = frm.getContentPane();
 		cp.add(outBox, BorderLayout.CENTER);
 		cp.add(inputPanel, BorderLayout.SOUTH);
 		cp.add(roomItemPanel, BorderLayout.WEST);
 		cp.add(inventoryPanel, BorderLayout.EAST);
-		cp.add(instructions, BorderLayout.NORTH);
 	}
 
 	public static void main(String[] args) {
@@ -266,7 +202,7 @@ public class UserInterface {
 		/*input = new Scanner(System.in);
 		System.out.println("What is your name?");
 		String name = input.nextLine();
-		List<Item> inventory = new ArrayList<Item>();
+		ArrayList<Item> inventory = new ArrayList<Item>();
 		Character playerOne = new Character(name, "You have no description yet.", Game.room1, inventory);
 		
 		String roomName = Game.room1.getName();
