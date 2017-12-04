@@ -7,31 +7,30 @@ public class MobScheduler extends MOB implements Runnable{
 		super(name, description, phrase, location, item);
 	}
 
-	public Runnable moveRoom() {
+	public Runnable runnableForMob(MOB theMob) {
 		return () -> {
 			Random rand = new Random();
 			int wait = rand.nextInt(30) + 1;
 			int door = rand.nextInt(3);
 			if (location.hasDoor(door)) {
 				String direction;
-				if (door == 0) {
-					direction = "north";
+				switch (door) {
+					case 0: direction = "north"; break;
+					case 1: direction = "east";  break;
+					case 2: direction = "south"; break;
+					case 3: direction = "west";  break;
+					default: direction = null;
 				}
-				if (door == 1) {
-					direction = "east";
-				}
-				if (door == 2) {
-					direction = "south";
-				}
-				else {
-					direction = "west";
-				}
-				try {
-					Thread.sleep(wait*1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				MOB.move(direction);
+				return (Runnable) () -> {
+					if (direction != null) {
+						try {
+							Thread.sleep(wait * 1000);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						theMob.move(direction);
+					}
+				};
 			}
 		};
 	}
