@@ -21,7 +21,6 @@ public class MobScheduler extends MOB implements Runnable{
 					case 3: direction = "west";  break;
 					default: direction = null;
 				}
-				return (Runnable) () -> {
 					if (direction != null) {
 						try {
 							Thread.sleep(wait * 1000);
@@ -30,9 +29,8 @@ public class MobScheduler extends MOB implements Runnable{
 						}
 						theMob.move(direction);
 					}
-				};
-			}
-		};
+				}
+			};
 	}
 	
 	@Override
