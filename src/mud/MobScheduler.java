@@ -19,7 +19,7 @@ public class MobScheduler extends MOB implements Runnable{
 					case 1: direction = "east";  break;
 					case 2: direction = "south"; break;
 					case 3: direction = "west";  break;
-					default: direction = null;
+					default: direction = null;   break;
 				}
 				return (Runnable) () -> {
 					if (direction != null) {
