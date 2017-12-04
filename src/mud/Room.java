@@ -14,6 +14,10 @@ public class Room extends GameObject {
 		this.doors = doors;
 	}
 
+	public boolean hasDoor(int doorIndex) {
+		return doors[doorIndex] == null;
+	}
+
 public String getSingularItem(int index) {
 		return items.get(index).getName();
 	}
