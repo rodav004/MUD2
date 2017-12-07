@@ -1,18 +1,26 @@
 package mud;
 import java.util.ArrayList;
 import java.util.Random;
-public class MobScheduler extends MOB implements Runnable{
+import java.util.concurrent.*;
 
-	public MobScheduler(String name, String description, String phrase, Room location, ArrayList<Item> item) {
-		super(name, description, phrase, location, item);
-	}
+public class MobScheduler {
 
-	public Runnable runnableForMob(MOB theMob) {
+	private MobScheduler() {}
+
+	public static final MobScheduler singleton = new MobScheduler();
+
+	private static final ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
+	public static void scheduleMOB(MOB theMob) {
+		threadPool.submit(MobScheduler.runnableForMob(theMob));
+        }
+		
+	public static Runnable runnableForMob(MOB theMob) {
 		return () -> {
 			Random rand = new Random();
 			int wait = rand.nextInt(30) + 1;
 			int door = rand.nextInt(3);
-			if (location.hasDoor(door)) {
+			if (theMob.location.hasDoor(door)) {
 				String direction;
 				switch (door) {
 					case 0: direction = "north"; break;
@@ -21,24 +29,15 @@ public class MobScheduler extends MOB implements Runnable{
 					case 3: direction = "west";  break;
 					default: direction = null;   break;
 				}
-				return (Runnable) () -> {
-					if (direction != null) {
-						try {
-							Thread.sleep(wait * 1000);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-						theMob.move(direction);
-					}
-				};
+				if (direction != null) {
+					theMob.move(direction);
+				}
+			}
+			try {
+				Thread.sleep(wait * 1000);	
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		};
 	}
-	
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub	
-	}
-
 }
-
