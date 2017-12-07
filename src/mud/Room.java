@@ -18,14 +18,8 @@ public class Room extends GameObject {
 		return doors[doorIndex] == null;
 	}
 
-public String getSingularItem(int index) {
+	public String getSingularItem(int index) {
 		return items.get(index).getName();
 	}
-	
-	public boolean hasDoor(int direction) {
-		if (doors[direction] != null) {
-			return true;
-		}
-		else return false;
-	}
+
 }
