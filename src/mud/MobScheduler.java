@@ -7,8 +7,6 @@ public class MobScheduler {
 
 	private MobScheduler() {}
 
-	public static final MobScheduler singleton = new MobScheduler();
-
 	private static final ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
 	public static void scheduleMOB(MOB theMob) {
