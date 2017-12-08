@@ -41,8 +41,12 @@ public class Game {
 		
 		//Room 2 constructed
 		room2 = new Room("Okay Room","This room is okay.",itemsRoom2,peopleRoom2,doorsRoom2);
-		
-		
+
+		MOB mob1 = new MOB("Vector", "A talking crocodile", room1,null, "Find the computer room!");
+		MobScheduler.scheduleMOB(mob1);
+		MOB mob2 = new MOB("Charmy", "A talking bee", room1,null, "Vector told me that he wants me to find five top secret disks. But like, what's a top secret disk?");
+		MobScheduler.scheduleMOB(mob2);
+
 		//Room 3
 		
 		//Room 3 Items

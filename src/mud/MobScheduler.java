@@ -11,14 +11,17 @@ public class MobScheduler {
 
 	public static void scheduleMOB(MOB theMob) {
 		threadPool.submit(MobScheduler.runnableForMob(theMob));
-        }
+	}
 		
 	public static Runnable runnableForMob(MOB theMob) {
 		return () -> {
 			while (true) {
 				Random rand = new Random();
 				int wait = rand.nextInt(30) + 1;
-				int door = rand.nextInt(3);
+				int door = rand.nextInt(4);
+
+				System.out.println("TESTMESSAGE:" + "Mob " + theMob.name + " tried to move to door " + door + "!");
+
 				if (theMob.location.hasDoor(door)) {
 					String direction;
 					switch (door) {
