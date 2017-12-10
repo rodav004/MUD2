@@ -1,5 +1,9 @@
 package mud;
 
+import net.michaelsavich.notification.Notification;
+import net.michaelsavich.notification.NotificationCenter;
+import net.michaelsavich.notification.NotificationObserver;
+
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -19,7 +23,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 
-public class UserInterface {	
+public class UserInterface implements NotificationObserver {
 	
 	private JTextField inputBox;
 	private JTextField outBox;
@@ -55,7 +59,8 @@ public class UserInterface {
 	}
 	private JFrame frm;
 
-	public UserInterface() { 
+	public UserInterface() {
+		NotificationCenter.primaryAsync().addObserver(this, "mobDidMoveRoom");
 		//roomMobs.add(mobsInRoom);
 		//adding all buttons to the corresponding arraylist
 		roomItemButtons.add(roomItemOne);
@@ -280,12 +285,17 @@ public class UserInterface {
 		cp.add(instructions, BorderLayout.NORTH);
 	}
 
-	public static void main(String[] args) {		
+	public static void main(String[] args) {
 		Game.start();
 		inc = 0;
 		UserInterface UI = new UserInterface();
 		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		UI.getFrame().setSize(750,250);
 		UI.getFrame().setVisible(true);	
+	}
+
+	@Override
+	public void receiveNotification(Notification notification) {
+
 	}
 }
