@@ -1,0 +1,3 @@
+[submodule "src/notification"]
+	path = src/notification
+	url = https://github.com/michaelsavich/NotificationCenter.git
