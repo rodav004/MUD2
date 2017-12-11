@@ -9,7 +9,7 @@ public class GameObject {
 	
 	}
 	
-	public void setName(String newName) {
+	private void setName(String newName) {
 		this.name = newName;
 	}
 	
@@ -17,7 +17,7 @@ public class GameObject {
 		return this.name;
 	}
 	
-	public void setDescription(String newDescription) {
+	private void setDescription(String newDescription) {
 		this.description = newDescription;
 	}
 	

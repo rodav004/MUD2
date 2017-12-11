@@ -1,13 +1,22 @@
 package mud;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.List;
 import java.util.ArrayList;
 
 public class Game {
 
+	public static List<Player> players = new ArrayList<>();
 	public static Room room1;
 	public static Room room2;
 	public static Room room3;
-	
+
+	public static Player newPlayer(String playerName) {
+		Player player = new Player(playerName, "You have no description yet", Game.room1, new ArrayList<>());
+		players.add(player);
+		return player;
+	}
+
 	public static void start() {
 		
 		// Room 1
@@ -15,11 +24,13 @@ public class Game {
 		// Room 1 items
 		Item torch = new Item("torch","A burning stick.");
 		Item apple = new Item("apple","A yummy red fruit.");
+		Item yapple = new Item("yapple","A yummy yellow fruit.");
 		
 		//Room 1 attributes
 		List<Item> itemsRoom1 = new ArrayList<>();
 			itemsRoom1.add(apple);
 			itemsRoom1.add(torch);
+			itemsRoom1.add(yapple);
 		List<Character> peopleRoom1 = new ArrayList<>();
 		Door[] doorsRoom1 = {null,null,null,null};
 		
@@ -75,6 +86,5 @@ public class Game {
 		doorsRoom3[3] = door4;
 		
 	}
-	
 
 }

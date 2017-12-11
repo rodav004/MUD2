@@ -1,9 +1,5 @@
 package mud;
 
-import net.michaelsavich.notification.Notification;
-import net.michaelsavich.notification.NotificationCenter;
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class MOB extends Character {
@@ -29,7 +25,6 @@ public class MOB extends Character {
 	@Override
 	public String move(String direction) {
 		String result = super.move(direction);
-		NotificationCenter.primaryAsync().post(new Notification("mobDidMoveRoom",this));
 		return result;
 	}
 

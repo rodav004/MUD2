@@ -1,4 +1,5 @@
 package mud;
+
 import java.util.ArrayList;
 
 public class Character extends GameObject {
