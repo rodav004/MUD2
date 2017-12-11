@@ -2,14 +2,83 @@ package mud;
 import java.util.ArrayList;
 
 public class Character extends GameObject {
-	Room location;
+	public Room location;
+	ArrayList<Item> inventory;
 	
-	public Character(String name, String description, Room location) {
+	public Character(String name, String description, Room location, ArrayList<Item> item) {
 		this.description = description;
 		this.name = name;
 		this.location = location;
+		this.inventory = item;
 	}
+	/**
+	 * 
+	 * @return an ArrayList of the names of the items in inventory
+	 */
+	public ArrayList<String> getItems() {
+		ArrayList<Item> items = this.inventory;
+		ArrayList<String> itemNames = new ArrayList<>();
+		for (Item item : items) {
+			itemNames.add(item.name);
+		}
+		return itemNames;
+	}
+	
+	/* public String getSingularItem(int index) {
+		return inventory.get(index).getName();
+	} */
+	
+	/**
+	 * addItem adds an item to the inventory
+	 * @param itemName takes in the item to be added to inventory
+	 * @return result a String declaring whether the item was added or not
+	 */
+	
+	public String addItem(String itemName)
+	{
+		ArrayList<Item> roomItems = new ArrayList<>(location.items);
+		String result = null;
+		if (roomItems.isEmpty()) {
+			result = "There are no items in this room."; }
+		for (Item items: roomItems)
+		{
+			String roomItemName = items.name;
+			if (roomItemName.equals(itemName))
+			{
+				Item foundItem = items;
+				inventory.add(foundItem);
+				location.items.remove(foundItem);
+				result = "Hooray! The item " + foundItem.getName() + " is now in your inventory. The description is: " + foundItem.getDescription() + ".";
+				break;
+			}
+			else result = "Sorry! The item is not in this room.";
+		}
+		return result;
+	}
+	/**
+	 * removeItem removes an item from inventory
+	 * @param itemName method takes in the name of the item to be found
+	 * @return String declaring if the item has been removed or if the item is not in inventory
+	 */
+	public String removeItem(String itemName)
+	{
+		String result = null;
+		ArrayList<Item> inventoryItems = new ArrayList<>(this.inventory);
+		if (inventory.isEmpty()) {
+			result = "Sorry, your inventory is empty.";  }
 
+		for (Item items : inventoryItems) {
+			if (items.name.equals(itemName))
+			{
+				Item foundItem = items;
+				location.items.add(foundItem);
+				inventory.remove(foundItem);
+				result = "The item " + itemName + " has been removed from your inventory and is in " + location.name + ".";
+			}
+			else result = "The item " + itemName + " is not in your inventory.";
+			}
+		return result;
+	}
 	
 	/**
 	 * move changes the room a character is in
@@ -23,17 +92,17 @@ public class Character extends GameObject {
 			Door exit = location.doors[0];
 			if (exit != null) {
 				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-				this.location = exit.room;
+				location = exit.room;
 			}
 			else {
 				newRoom = "There is not a door in that direction!";
 			}
 		}
 		else if (direction.equals("south") || direction.equals("down")) {
-			Door exit = this.location.doors[2];
+			Door exit = location.doors[2];
 			if (exit != null) {
 				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-				this.location = exit.room;
+				location = exit.room;
 			}
 			else {
 				newRoom = "There is not a door in that direction!";
@@ -43,7 +112,7 @@ public class Character extends GameObject {
 			Door exit = location.doors[1];
 			if (exit != null) {
 				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-				this.location = exit.room;
+				location = exit.room;
 			}
 			else {
 				newRoom = "There is not a door in that direction!";
@@ -53,7 +122,7 @@ public class Character extends GameObject {
 			Door exit = location.doors[3];
 			if (exit != null) {
 				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
-				this.location = exit.room;
+				location = exit.room;
 			}
 			else {
 				newRoom = "There is not a door in that direction!";
@@ -64,11 +133,8 @@ public class Character extends GameObject {
 		}
 		
 		return newRoom;
+		
 	}
 	
-	public String look() {
-		return location.getDescription();
-	}
 	
-
 }
