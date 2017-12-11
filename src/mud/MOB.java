@@ -1,29 +1,16 @@
 package mud;
-
-import java.util.ArrayList;
 import java.util.Random;
-
-public class MOB extends Character {
+import java.util.ArrayList;
+public class MOB extends Character{
+	static String phrase;
+	static Item item;
 	
-	private Item mobItem;
-	private String speech;
-	
-	public MOB(String name, String description, Room location, Item mobItem, String speech) {
-		super(name, description, location);
-		this.mobItem = mobItem;
-		this.speech = speech;
-		// TODO Auto-generated constructor stub
+	public MOB(String name, String description, String phrase, Room location, ArrayList<Item> item) {
+		super(name, description, location, item);
+		this.phrase = phrase;
 	}
 	
-	public Item getMobItem(){
-		return mobItem;
-	}
-	
-	public String getSpeech() {
-		return speech;
-	}
-	
-	private Random rand = new Random();
-	public void step() {
+	public void update() {
+		MobObserver.singleton.updateUI();
 	}
 }
