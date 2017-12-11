@@ -1,9 +1,5 @@
 package mud;
 
-import net.michaelsavich.notification.Notification;
-import net.michaelsavich.notification.NotificationCenter;
-import net.michaelsavich.notification.NotificationObserver;
-
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -15,6 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JList;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
@@ -22,8 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-
-public class UserInterface implements NotificationObserver {
+import java.util.Observable;
+import java.util.Observer;
+public class UserInterface implements Observer{	
 	
 	private JTextField inputBox;
 	private JTextField outBox;
@@ -40,7 +38,7 @@ public class UserInterface implements NotificationObserver {
 	private JButton roomItemThree = new JButton("rock");
 	private JButton roomItemFour = new JButton("pen");
 	private JLabel roomName = new JLabel();
-	private JTextArea mobsInRoom = new JTextArea("Other Characters");
+	private JTextArea mobsInRoom = new DebuggyJTextArea();
 	
 	private JPanel inventoryPanel;
 	private JLabel inventoryItemsLabel = new JLabel("Inventory");
@@ -53,15 +51,15 @@ public class UserInterface implements NotificationObserver {
 	
 	private ArrayList<JButton> roomItemButtons = new ArrayList<>();
 	private ArrayList<JButton> inventoryItemButtons = new ArrayList<>();
+	private ArrayList<MOB> MOBSlist = new ArrayList<>();
+	//private JList<String> mobsInRoom= new JList<String>();
 	
 	public JFrame getFrame() {
 		return this.frm;
 	}
 	private JFrame frm;
 
-	public UserInterface() {
-		NotificationCenter.primaryAsync().addObserver(this, "mobDidMoveRoom");
-		//roomMobs.add(mobsInRoom);
+	public UserInterface() { 
 		//adding all buttons to the corresponding arraylist
 		roomItemButtons.add(roomItemOne);
 		roomItemButtons.add(roomItemTwo);
@@ -79,6 +77,7 @@ public class UserInterface implements NotificationObserver {
 
 		//creation of input box
 		this.inputBox = new JTextField(10);
+		
 
 		inputBox.setEditable(true);
 		inputBox.setText("Enter name");
@@ -136,10 +135,9 @@ public class UserInterface implements NotificationObserver {
 		}
 		
 		//setting the instructions text area
-		String move = "To change rooms: move + north/south/east/west";
-		String getItem = "To add an item to inventory, click the button";
-		String dropItem = "To drop an item: drop + item name";
-		instructions.setText(move + "\n" + getItem + "\n" + dropItem);
+		instructions.append("To change rooms: move + north/south/east/west \n");
+		instructions.append("To add an item to inventory, click the button \n");
+		instructions.append("To drop an item: drop + item name");
 		
 		outBox.setText("Welcome to our unnamed game!");
 			inputButton.addActionListener(new ActionListener() {
@@ -285,17 +283,42 @@ public class UserInterface implements NotificationObserver {
 		cp.add(instructions, BorderLayout.NORTH);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {		
 		Game.start();
+		UserInterface ui = new UserInterface();
+		MobObserver.singleton.addObserver(ui);
 		inc = 0;
 		UserInterface UI = new UserInterface();
 		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		UI.getFrame().setSize(750,250);
 		UI.getFrame().setVisible(true);	
 	}
-
+	
 	@Override
-	public void receiveNotification(Notification notification) {
+	public void update(Observable o, Object arg) {
+		System.out.println(mobsInRoom.getText());
+		mobsInRoom.append("test one \n");
+		System.out.println(mobsInRoom.getText());
 
+		MOBSlist.removeAll(MOBSlist);
+		for (MOB m : Game.mobsTracker) {
+			mobsInRoom.append("test two \n");
+			System.out.println(m.name + " is in " + m.location.getName());
+			if (playerOne != null && m.location == playerOne.location ) {
+				MOBSlist.add(m);
+			}
+		}
+		for (MOB m : MOBSlist) {
+			mobsInRoom.append("test three \n");
+			mobsInRoom.append(m.getName() + "\n");
+		}
+	}
+}
+
+class DebuggyJTextArea extends JTextArea {
+	public void append(String str) {
+		super.append(str);
+		System.out.println("Set with " + str);
+		System.out.println(this.getText());
 	}
 }
