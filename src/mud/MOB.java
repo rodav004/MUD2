@@ -25,6 +25,7 @@ public class MOB extends Character {
 	@Override
 	public String move(String direction) {
 		String result = super.move(direction);
+		System.out.println(this.getName() + " is in " + this.location.getName());
 		return result;
 	}
 

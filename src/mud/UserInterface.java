@@ -7,14 +7,15 @@ import java.awt.Container;
 import javax.swing.*;
 
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserInterface {
-	
+
 	private JTextField inputBox;
 	private JTextField outBox;
 	private JPanel inputPanel;
 	private JButton inputButton;
-
 
 	private static enum EntryState {
 		NAME("Enter name"),
@@ -32,7 +33,7 @@ public class UserInterface {
 	private JPanel roomPanel = new JPanel();
 	private JPanel roomItemPanel = new JPanel();
 	private JLabel roomName = new JLabel();
-	private JTextArea mobsInRoom = new JTextArea("Other Characters");
+	private JTextArea mobsInRoom = new JTextArea();
 
 	private JPanel inventoryPanel = new JPanel();
 	private JLabel inventoryItemsLabel = new JLabel("Inventory");
@@ -44,8 +45,15 @@ public class UserInterface {
 	}
 	private JFrame frm;
 
+	private static List<UserInterface> instances = new ArrayList<UserInterface>();
+
+	public static void mobDidMove(MOB mob) {
+		instances.forEach(UserInterface::update);
+	}
+
 	public UserInterface() {
-		
+		UserInterface.instances.add(this);
+
 		//creation of the frame
 		this.frm = new JFrame("MUD");
 		frm.setSize(500,300);
@@ -142,6 +150,13 @@ public class UserInterface {
 			inventoryPanel.add(itemButton);
 		}
 
+		mobsInRoom.setText("Other Characters:\n");
+		playerOne.location.characters.stream()
+				.filter((o) -> (o instanceof MOB))
+				.map(Character::getName)
+				.map(StringUtils::appendNewline)
+				.forEach(mobsInRoom::append);
+
 		inputBox.setText(entryState.promptString);
 
 		frm.revalidate();
@@ -157,3 +172,4 @@ public class UserInterface {
 	}
 
 }
+
