@@ -1,58 +1,43 @@
 package mud;
 
-import net.michaelsavich.notification.Notification;
-import net.michaelsavich.notification.NotificationCenter;
-import net.michaelsavich.notification.NotificationObserver;
+import java.awt.event.*;
 
-import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import javax.swing.BoxLayout;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
-
-public class UserInterface implements NotificationObserver {
+public class UserInterface {
 	
 	private JTextField inputBox;
 	private JTextField outBox;
 	private JPanel inputPanel;
 	private JButton inputButton;
-	public static int inc = 0;
-	private Character playerOne;
+
+
+	private static enum EntryState {
+		NAME("Enter name"),
+		COMMAND("Enter command");
+
+		public String promptString;
+		EntryState(String prompt) {
+			promptString = prompt;
+		}
+	}
+	private EntryState entryState = EntryState.NAME;
+
+	private Player playerOne;
 	
-	private JPanel roomPanel;
-	private JPanel roomItemPanel;
-	private JPanel roomMobs;
-	private JButton roomItemOne = new JButton("apple");
-	private JButton roomItemTwo = new JButton("torch");
-	private JButton roomItemThree = new JButton("rock");
-	private JButton roomItemFour = new JButton("pen");
+	private JPanel roomPanel = new JPanel();
+	private JPanel roomItemPanel = new JPanel();
 	private JLabel roomName = new JLabel();
 	private JTextArea mobsInRoom = new JTextArea("Other Characters");
-	
-	private JPanel inventoryPanel;
+
+	private JPanel inventoryPanel = new JPanel();
 	private JLabel inventoryItemsLabel = new JLabel("Inventory");
-	private JButton inventoryItemOne = new JButton("apple");
-	private JButton inventoryItemTwo = new JButton("torch");
-	private JButton inventoryItemThree = new JButton("rock");
-	private JButton inventoryItemFour = new JButton("pen");
 	
 	private JTextArea instructions = new JTextArea();
-	
-	private ArrayList<JButton> roomItemButtons = new ArrayList<>();
-	private ArrayList<JButton> inventoryItemButtons = new ArrayList<>();
 	
 	public JFrame getFrame() {
 		return this.frm;
@@ -60,18 +45,6 @@ public class UserInterface implements NotificationObserver {
 	private JFrame frm;
 
 	public UserInterface() {
-		NotificationCenter.primaryAsync().addObserver(this, "mobDidMoveRoom");
-		//roomMobs.add(mobsInRoom);
-		//adding all buttons to the corresponding arraylist
-		roomItemButtons.add(roomItemOne);
-		roomItemButtons.add(roomItemTwo);
-		roomItemButtons.add(roomItemThree);
-		roomItemButtons.add(roomItemFour);
-		
-		inventoryItemButtons.add(inventoryItemOne);
-		inventoryItemButtons.add(inventoryItemTwo);
-		inventoryItemButtons.add(inventoryItemThree);
-		inventoryItemButtons.add(inventoryItemFour);
 		
 		//creation of the frame
 		this.frm = new JFrame("MUD");
@@ -82,40 +55,17 @@ public class UserInterface implements NotificationObserver {
 
 		inputBox.setEditable(true);
 		inputBox.setText("Enter name");
-				inputBox.addMouseListener(new MouseListener() {
+		inputBox.addFocusListener(new FocusAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {
-				}
-				else {
+			public void focusGained(FocusEvent e) {
+				if (inputBox.getText().equals(entryState.promptString)) {
 					inputBox.setText("");
 				}
 			}
 			@Override
-			public void mousePressed(MouseEvent e) {	
-			}
-			@Override
-			public void mouseReleased(MouseEvent e) {
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				if (!(inputBox.getText().equals("Enter name") || inputBox.getText().equals("Enter command"))) {
-				}
-				else {
-					inputBox.setText("");
-				}
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				if (!(inputBox.getText().equals("Enter name")
-					|| inputBox.getText().equals("Enter command")
-					|| inputBox.getText().equals(""))) {	
-				}
-				else if (inc == 0) {
-						inputBox.setText("Enter name");
-				}
-				else {
-					inputBox.setText("Enter command");
+			public void focusLost(FocusEvent e) {
+				if (inputBox.getText().equals("")) {
+					inputBox.setText(entryState.promptString);
 				}
 			}
 		});
@@ -126,176 +76,84 @@ public class UserInterface implements NotificationObserver {
 		outBox.setEditable(false);
 		instructions.setEditable(false);
 		mobsInRoom.setVisible(false);
-		
-		//setting room and inventory items to be hidden
-		for (JButton button: roomItemButtons) {
-			button.setVisible(false);
-		}
-		for (JButton button: inventoryItemButtons) {
-			button.setVisible(false);
-		}
-		
+
+
 		//setting the instructions text area
-		String move = "To change rooms: move + north/south/east/west";
-		String getItem = "To add an item to inventory, click the button";
-		String dropItem = "To drop an item: drop + item name";
-		instructions.setText(move + "\n" + getItem + "\n" + dropItem);
+		instructions.setText(
+				"To change rooms: move + north/south/east/west\n" +
+				"To add an item to inventory, click the button\n" +
+				"To drop an item: drop + item name"
+		);
 		
 		outBox.setText("Welcome to our unnamed game!");
-			inputButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					if (inc == 0) {
+		inputButton.addActionListener((e) -> {
+				if (entryState == EntryState.NAME) {
+
 					String name = inputBox.getText();
-					ArrayList<Item> inventory = new ArrayList<Item>();
-					playerOne = new Character(name, "You have no description yet", Game.niceRoom, inventory);
-					outBox.setText("Hello " + name + "! You are in the " + Game.niceRoom.getName());
+					playerOne = Game.newPlayer(inputBox.getText());
 					roomName.setText(playerOne.location.getName());
-					roomItemOne.setVisible(true);
-					roomItemTwo.setVisible(true);
+					outBox.setText("Hello " + name + "! You are in the " + roomName.getText());
+
+
 					inventoryItemsLabel.setVisible(true);
 					mobsInRoom.setVisible(true);
-					inputBox.setText("Enter command");
-					inc++;
-					}
-			else {
-				String action = inputBox.getText();
-				String result = Parse.parse(playerOne, action);
-				if (playerOne.location.equals(Game.niceRoom)) {
-					roomName.setText(Game.niceRoom.getName());
-					roomItemThree.setVisible(false);
-					roomItemFour.setVisible(false);
-					if (inventoryItemOne.isVisible()) {
-						roomItemOne.setVisible(false);
-					}
-					else roomItemOne.setVisible(true);
-					if (inventoryItemTwo.isVisible()) {
-						roomItemTwo.setVisible(false);
-					}
-					else roomItemTwo.setVisible(true);
+					entryState = EntryState.COMMAND;
+					inputBox.setText(EntryState.COMMAND.promptString);
+				} else {
+					String action = Parser.parse(playerOne, inputBox.getText());
+					outBox.setText(action);
 				}
-				if (playerOne.location.equals(Game.okayRoom)) {
-					roomName.setText(Game.okayRoom.getName());
-					roomItemOne.setVisible(false);
-					roomItemTwo.setVisible(false);
-					if (inventoryItemThree.isVisible()) {
-						roomItemThree.setVisible(false);
-					}
-					else roomItemThree.setVisible(true);
-					if (inventoryItemFour.isVisible()) {
-						roomItemFour.setVisible(false);
-					}
-					else roomItemFour.setVisible(true);
-				}
-				if (action.contains("drop")) {
-					if (action.contains("apple")) {
-						inventoryItemOne.setVisible(false);
-						if (playerOne.location.equals(Game.niceRoom)) {
-						roomItemOne.setVisible(true);
-						}
-					}
-					if (action.contains("torch")) {
-						inventoryItemTwo.setVisible(false);
-						if (playerOne.location.equals(Game.niceRoom)) {
-							roomItemTwo.setVisible(true);
-						}
-					}
-					if (action.contains("rock")) {
-						inventoryItemThree.setVisible(false);
-						if (playerOne.location.equals(Game.okayRoom)) {
-							roomItemThree.setVisible(true);
-						}
-					}
-					if (action.contains("pen")) {
-						inventoryItemFour.setVisible(false);
-						if (playerOne.location.equals(Game.okayRoom)) {
-							roomItemFour.setVisible(true);
-						}
-					}
-				}
-				outBox.setText(result);
-				inputBox.setText("");
-				}
-			}
-		}); 		
+				update();
+		});
 
-		roomItemOne.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String action = Parse.parse(playerOne, "get " + roomItemOne.getText());
-				outBox.setText(action);
-				roomItemOne.setVisible(false);
-				inventoryItemOne.setVisible(true);
-			}
-		});
-		
-		roomItemTwo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String action = Parse.parse(playerOne, "get " + roomItemTwo.getText());
-				outBox.setText(action);
-				roomItemTwo.setVisible(false);
-				inventoryItemTwo.setVisible(true);
-			}
-		});
-		
-		roomItemThree.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String action = Parse.parse(playerOne, "get " + roomItemThree.getText());
-				outBox.setText(action);
-				roomItemThree.setVisible(false);
-				inventoryItemThree.setVisible(true);
-			}
-		});
-		
-		roomItemFour.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String action = Parse.parse(playerOne, "get " + roomItemFour.getText());
-				outBox.setText(action);
-				roomItemFour.setVisible(false);
-				inventoryItemFour.setVisible(true);
-			}
-		});
-		
-			
 		this.inputPanel = new JPanel(new FlowLayout(FlowLayout.LEADING));
 		inputPanel.add(inputBox);
 		inputPanel.add(inputButton);
 		
-		roomItemPanel = new JPanel();
 		roomItemPanel.add(roomName);
 		roomItemPanel.setLayout(new BoxLayout(roomItemPanel, BoxLayout.Y_AXIS));
-		for (JButton button: roomItemButtons) {
-			roomItemPanel.add(button);
-		}
 		
-		roomPanel = new JPanel();
 		roomPanel.setLayout(new BoxLayout(roomPanel, BoxLayout.Y_AXIS));
-		roomPanel.add(roomItemPanel);
+		roomPanel.add(new JScrollPane(roomItemPanel));
 		roomPanel.add(mobsInRoom);
-		
-		inventoryPanel = new JPanel();
+
 		inventoryPanel.setLayout(new BoxLayout(inventoryPanel, BoxLayout.Y_AXIS));
-		for (JButton button: inventoryItemButtons) {
-			inventoryPanel.add(button);
-		}
 		
 		Container cp = frm.getContentPane();
 		cp.add(outBox, BorderLayout.CENTER);
 		cp.add(inputPanel, BorderLayout.SOUTH);
 		cp.add(roomPanel, BorderLayout.WEST);
-		cp.add(inventoryPanel, BorderLayout.EAST);
+		cp.add(new JScrollPane(inventoryPanel), BorderLayout.EAST);
 		cp.add(instructions, BorderLayout.NORTH);
+	}
+
+	public void update() {
+		roomItemPanel.removeAll();
+		for (Item i : playerOne.location.items) {
+			JButton itemButton = new JButton(i.name);
+			itemButton.addActionListener((e) -> { Parser.parse(playerOne, "get " + i.name); update();});
+			roomItemPanel.add(itemButton);
+		}
+
+		inventoryPanel.removeAll();
+		for (Item i : playerOne.getItems()) {
+			JButton itemButton = new JButton(i.name);
+			itemButton.addActionListener((e) -> { Parser.parse(playerOne, "drop " + i.name); update();});
+			inventoryPanel.add(itemButton);
+		}
+
+		inputBox.setText(entryState.promptString);
+
+		frm.revalidate();
+		frm.repaint();
 	}
 
 	public static void main(String[] args) {
 		Game.start();
-		inc = 0;
 		UserInterface UI = new UserInterface();
 		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		UI.getFrame().setSize(750,250);
 		UI.getFrame().setVisible(true);	
 	}
 
-	@Override
-	public void receiveNotification(Notification notification) {
-
-	}
 }
