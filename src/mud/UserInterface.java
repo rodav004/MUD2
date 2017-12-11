@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class UserInterface {
 
@@ -81,10 +82,7 @@ public class UserInterface {
 		//creation of bottom bar where the player will enter actions
 		this.inputButton = new JButton("Submit");
 		this.outBox = new JTextField();
-		outBox.setEditable(false);
-		instructions.setEditable(false);
-		mobsInRoom.setVisible(false);
-
+		Stream.of(outBox,instructions,mobsInRoom).forEach((c) -> c.setVisible(false));
 
 		//setting the instructions text area
 		instructions.setText(
