@@ -36,7 +36,7 @@ public class MobScheduler{
 				if (direction != null) {
 					theMob.move(direction);
 					System.out.println(theMob.move(direction));
-					theMob.update();
+					Game.mobMovement.notifyObservers(theMob);
 				}
 			}
 			try {

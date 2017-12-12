@@ -19,6 +19,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.Observable;
 import java.util.Observer;
+
 public class UserInterface implements Observer{	
 	
 	private JTextField inputBox;
@@ -46,7 +47,10 @@ public class UserInterface implements Observer{
 	}
 	private JFrame frm;
 
-	public UserInterface() { 
+	public UserInterface() {
+
+		Game.mobMovement.addObserver(this);
+
 		//creation of the frame
 		this.frm = new JFrame("MUD");
 		frm.setSize(500,300);
@@ -90,7 +94,6 @@ public class UserInterface implements Observer{
 					inventoryItemsLabel.setVisible(true);
 					mobsInRoom.setVisible(true);
 					updateItems();
-					MobObserver.singleton.update();
 					inputBox.setText("Enter command");
 					inc++;
 				}
@@ -99,7 +102,6 @@ public class UserInterface implements Observer{
 					String result = Parser.parse(playerOne, action);
 					roomName.setText(playerOne.location.name);
 					updateItems();
-					MobObserver.singleton.update();
 					outBox.setText(result);
 					inputBox.setText("");
 				}
@@ -134,7 +136,6 @@ public class UserInterface implements Observer{
 		Game.start();
 		UserInterface UI = new UserInterface();
 		
-		MobObserver.singleton.addObserver(UI);
 		inc = 0;
 		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		UI.getFrame().setSize(750,250);

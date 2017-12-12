@@ -1,5 +1,8 @@
 package mud;
+
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 public class Game {
 	public static Room niceRoom;
@@ -35,7 +38,22 @@ public class Game {
 	public static MOB michael;
 	
 	public static ArrayList<MOB> mobsTracker = new ArrayList<>();
-	
+
+
+	static Observable mobMovement = new Observable() {
+		@Override
+		public void notifyObservers() {
+			this.setChanged();
+			super.notifyObservers();
+		}
+
+		@Override
+		public void notifyObservers(Object arg) {
+			this.setChanged();
+			super.notifyObservers(arg);
+		}
+	};
+
 	public static void start() {
 		
 		//Items
