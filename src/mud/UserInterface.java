@@ -38,7 +38,7 @@ public class UserInterface implements Observer{
 	private JButton roomItemThree = new JButton("rock");
 	private JButton roomItemFour = new JButton("pen");
 	private JLabel roomName = new JLabel();
-	private JTextArea mobsInRoom = new DebuggyJTextArea();
+	private JTextArea mobsInRoom = new JTextArea();
 	
 	private JPanel inventoryPanel;
 	private JLabel inventoryItemsLabel = new JLabel("Inventory");
@@ -285,10 +285,10 @@ public class UserInterface implements Observer{
 
 	public static void main(String[] args) {		
 		Game.start();
-		UserInterface ui = new UserInterface();
-		MobObserver.singleton.addObserver(ui);
-		inc = 0;
 		UserInterface UI = new UserInterface();
+
+		MobObserver.singleton.addObserver(UI);
+		inc = 0;
 		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		UI.getFrame().setSize(750,250);
 		UI.getFrame().setVisible(true);	
