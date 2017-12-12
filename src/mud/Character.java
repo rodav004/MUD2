@@ -9,7 +9,6 @@ public class Character extends GameObject {
 		this.description = description;
 		this.name = name;
 		this.location = location;
-		this.location.characters.add(this);
 	}
 
 	
@@ -50,9 +49,7 @@ public class Character extends GameObject {
 		if (validDirection && exit != null) {
 			newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
 			synchronized (this) {
-				this.location.characters.remove(this);
 				this.location = exit.room;
-				this.location.characters.add(this);
 			}
 		}
 		else if (validDirection && exit == null) {
