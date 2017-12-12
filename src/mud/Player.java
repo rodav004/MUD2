@@ -7,22 +7,17 @@ public class Player extends Character {
 	private ArrayList<Item> inventory;
 
 	public Player(String name, String description, Room location, ArrayList<Item> inventory) {
-		super(name, description, location);
+		super(name, description, location, inventory);
 		this.inventory = inventory;
 		// TODO Auto-generated constructor stub
 	}
 	
 	/**
 	 * 
-	 * @return an ArrayList of the names of the items in inventory
+	 * @return an ArrayList of the items in inventory
 	 */
-	public ArrayList<String> getItems() {
-		ArrayList<Item> items = this.inventory;
-		ArrayList<String> itemNames = new ArrayList<>();
-		for (Item item : items) {
-			itemNames.add(item.name);
-		}
-		return itemNames;
+	public ArrayList<Item> getItems() {
+		return this.inventory;
 	}
 	/**
 	 * addItem adds an item to the inventory
