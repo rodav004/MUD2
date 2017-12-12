@@ -104,8 +104,6 @@ public class UserInterface {
 					roomName.setText(playerOne.location.getName());
 					outBox.setText("Hello " + name + "! You are in the " + roomName.getText());
 
-					inventoryItemsLabel.setVisible(true);
-					mobsInRoom.setVisible(true);
 					entryState = EntryState.COMMAND;
 					inputBox.setText(EntryState.COMMAND.promptString);
 				} else {
