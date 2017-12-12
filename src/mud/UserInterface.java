@@ -129,17 +129,6 @@ public class UserInterface implements Observer{
 		cp.add(inventoryPanel, BorderLayout.EAST);
 		cp.add(instructions, BorderLayout.NORTH);
 	}
-
-	public static void main(String[] args) {		
-		Game.start();
-		UserInterface UI = new UserInterface();
-		
-		MobObserver.singleton.addObserver(UI);
-		inc = 0;
-		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		UI.getFrame().setSize(750,250);
-		UI.getFrame().setVisible(true);	
-	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
