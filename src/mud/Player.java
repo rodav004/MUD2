@@ -7,7 +7,7 @@ public class Player extends Character {
 	private ArrayList<Item> inventory;
 
 	public Player(String name, String description, Room location, ArrayList<Item> inventory) {
-		super(name, description, location);
+		super(name, description, location, inventory);
 		this.inventory = inventory;
 		// TODO Auto-generated constructor stub
 	}
