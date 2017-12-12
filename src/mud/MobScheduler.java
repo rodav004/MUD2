@@ -20,10 +20,10 @@ public class MobScheduler{
 		return () -> {
 			Random rand = new Random();
 			while (true) {
-			int wait = rand.nextInt(10) + 1;
-			int door = rand.nextInt(3);
-			System.out.println(theMob.getName() + ": door is " + door);
-			System.out.println(theMob.getName() + ": wait is " + wait);
+			int wait = rand.nextInt(15) + 1;
+			int door = rand.nextInt(4);
+			//System.out.println(theMob.getName() + ": door is " + door);
+			//System.out.println(theMob.getName() + ": wait is " + wait);
 			if (theMob.location.hasDoor(door)) {
 				String direction;
 				switch (door) {
