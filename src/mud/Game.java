@@ -34,7 +34,7 @@ public class Game {
 	public static MOB cara;
 	public static MOB michael;
 	
-	public static ArrayList<MOB> mobsTracker = new ArrayList<>();
+	public static ArrayList<Character> mobsTracker = new ArrayList<>();
 	
 	public static void start() {
 		
