@@ -34,17 +34,17 @@ public class UserInterface {
 	private JPanel roomPanel = new JPanel();
 	private JPanel roomItemPanel = new JPanel();
 	private JLabel roomName = new JLabel();
-	private JTextArea mobsInRoom = new JTextArea();
-
-	private JPanel inventoryPanel = new JPanel();
-	private JLabel inventoryItemsLabel = new JLabel("Inventory");
-
-	private JTextArea instructions = new JTextArea() {
+	private JTextArea mobsInRoom = new JTextArea() {
 		@Override
 		public void append(String str) {
 			super.append(str + "\n");
 		}
 	};
+
+	private JPanel inventoryPanel = new JPanel();
+	private JLabel inventoryItemsLabel = new JLabel("Inventory");
+
+	private JTextArea instructions = new JTextArea();
 	
 	public JFrame getFrame() {
 		return this.frm;
@@ -150,7 +150,7 @@ public class UserInterface {
 		}
 
 		mobsInRoom.setText("Other Characters:\n");
-		playerOne.location.characters.stream()
+		Game.nearbyCharacters(playerOne).stream()
 				.filter((o) -> (o instanceof MOB))
 				.map(Character::getName)
 				.forEach(mobsInRoom::append);
