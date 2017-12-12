@@ -1,8 +1,10 @@
 package mud;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Room extends GameObject {
 	ArrayList<Item> items;
+	List<Character> characters;
 	Door[] doors;
 	
 	public Room(String name, String description, ArrayList<Item> items, Door[] doors) {
@@ -12,13 +14,8 @@ public class Room extends GameObject {
 		this.doors = doors;
 	}
 	
-	public ArrayList<String> getItems() {
-		ArrayList<Item> items = this.items;
-		ArrayList<String> itemNames = new ArrayList<>();
-		for (Item item : items) {
-			itemNames.add(item.name);
-		}
-		return itemNames;
+	public ArrayList<Item> getItems() {
+		return this.items;
 	}
 	
 	public String getSingularItem(int index) {
