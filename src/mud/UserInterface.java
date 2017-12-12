@@ -25,21 +25,21 @@ public class UserInterface implements Observer{
 	private JTextField outBox;
 	private JPanel inputPanel;
 	private JButton inputButton;
-	public static int inc = 0;
-	private static Player playerOne;
+	private Player playerOne;
 	
 	private JPanel roomPanel;
-	private static JPanel roomItemPanel;
+	private JPanel roomItemPanel;
 	private JLabel roomName = new JLabel();
 	private JTextArea mobsInRoom = new JTextArea();
 	
-	private static JPanel inventoryPanel;
+	private JPanel inventoryPanel;
 	private JLabel inventoryItemsLabel = new JLabel("Inventory");
 	
 	private JTextArea instructions = new JTextArea();
 	
-	private ArrayList<MOB> MOBSlist = new ArrayList<>();
-	//private JList<String> mobsInRoom= new JList<String>();
+	private ArrayList<Character> MOBSlist = new ArrayList<>();
+	
+	public boolean inc = true;
 	
 	public JFrame getFrame() {
 		return this.frm;
@@ -81,7 +81,7 @@ public class UserInterface implements Observer{
 		outBox.setText("Welcome to our unnamed game!");
 		inputButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (inc == 0) {
+				if (inc) {
 					String name = inputBox.getText();
 					ArrayList<Item> inventory = new ArrayList<Item>();
 					playerOne = new Player(name, "You have no description yet", Game.niceRoom, inventory);
@@ -92,7 +92,8 @@ public class UserInterface implements Observer{
 					updateItems();
 					MobObserver.singleton.update();
 					inputBox.setText("Enter command");
-					inc++;
+					inc = false;
+					Game.mobsTracker.add(playerOne);
 				}
 				else {
 					String action = inputBox.getText();
@@ -129,28 +130,30 @@ public class UserInterface implements Observer{
 		cp.add(inventoryPanel, BorderLayout.EAST);
 		cp.add(instructions, BorderLayout.NORTH);
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
-		//mobsInRoom.append("test one \n");
 		//System.out.println(mobsInRoom.getText());
 
 		MOBSlist.removeAll(MOBSlist);
-		for (MOB m : Game.mobsTracker) {
-			//mobsInRoom.append("test two \n");
+		for (Character m : Game.mobsTracker) {
 			//System.out.println(m.name + " is in " + m.location.getName());
 			if (playerOne != null && m.location == playerOne.location ) {
 				MOBSlist.add(m);
 			}
 		}
 		mobsInRoom.setText("Characters in this room:\n");
-		for (MOB m : MOBSlist) {
-			//mobsInRoom.append("test three \n");
-			mobsInRoom.append(m.getName() + "\n");
+		for (Character m : MOBSlist) {
+			if (m.equals(playerOne)) {
+				mobsInRoom.append("You\n");
+			}
+			else {
+				mobsInRoom.append(m.getName() + "\n");
+			}
 		}
 	}
 	
-	public static void updateItems() {
+	public void updateItems() {
 		roomItemPanel.removeAll();
 		for (Item i : playerOne.location.items) {
 			JButton itemButton = new JButton(i.name);
