@@ -1,0 +1,18 @@
+package mud;
+
+import javax.swing.JFrame;
+
+public class Main {
+	public static int inc;
+	
+	public static void main(String[] args) {		
+		Game.start();
+		UserInterface UI = new UserInterface();
+		
+		MobObserver.singleton.addObserver(UI);
+		inc = 0;
+		UI.getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		UI.getFrame().setSize(750,250);
+		UI.getFrame().setVisible(true);	
+	}
+}
