@@ -24,12 +24,12 @@ public class Game {
 	public static MOB jill;
 	public static MOB tomK;
 	public static MOB tomM;
-	public static MOB muhummad;
+	public static MOB muhammad;
 	public static MOB justinBrody;
 	public static MOB justinC;
 	public static MOB cat;
 	public static MOB julian;
-	public static MOB econProfessor;
+	public static MOB econProf;
 	public static MOB rosie;
 	public static MOB cara;
 	public static MOB michael;
@@ -53,36 +53,36 @@ public class Game {
 		itemsxLab.add(laptop);
 		itemsxLab.add(notebook);
 		Door[] doorsxLab = {null, null, null, null};
-		xLab = new Room("X-Lab", "A place for MACS students to do work", itemsxLab, doorsxLab);
+		xLab = new Room("X-Lab", "A place for MACS students to do work.", itemsxLab, doorsxLab);
 		
 		//jillsOffice creation
 		ArrayList<Item> itemsJillsOffice = new ArrayList<>();
 		itemsJillsOffice.add(trailMix);
 		Door[] doorsJillsOffice = {null, null, null, null};
-		jillsOffice = new Room("Jill's Office", "The door is open", itemsJillsOffice, doorsJillsOffice);
+		jillsOffice = new Room("Jill's Office", "The door is open.", itemsJillsOffice, doorsJillsOffice);
 		
 		//Tom's office creation
 		ArrayList<Item> itemsTomsOffice = new ArrayList<>();
 		Door[] doorsTomsOffice = {null, null, null, null};
-		tomsOffice = new Room("Tom's Office", "The door is open", itemsTomsOffice, doorsTomsOffice);
+		tomsOffice = new Room("Tom's Office", "The door is open.", itemsTomsOffice, doorsTomsOffice);
 		
 		//Justin's office creation
 		ArrayList<Item> itemsJustinsOffice = new ArrayList<>();
 		Door[] doorsJustinsOffice = {null, null, null, null};
-		justinsOffice = new Room("Justin's Office", "The door is open", itemsJustinsOffice, doorsJustinsOffice);
+		justinsOffice = new Room("Justin's Office", "The door is open.", itemsJustinsOffice, doorsJustinsOffice);
 		
 		//Julia Roger's Lobby creation
 		ArrayList<Item> itemsJRLobby = new ArrayList<>();
 		itemsJRLobby.add(backpack);
 		Door[] doorsJRLobby = {null, null, null, null};
-		jrLobby = new Room("Julia Roger's Lobby", "A place where students wait for class", itemsJRLobby, doorsJRLobby);
+		jrLobby = new Room("Julia Roger's Lobby", "A place where students wait for class.", itemsJRLobby, doorsJRLobby);
 		
 		//JR128 creation
 		ArrayList<Item> itemsJR128 = new ArrayList<>();
 		itemsJR128.add(textbook);
 		itemsJR128.add(paper);
 		Door[] doorsJR128 = {null, null, null, null};
-		jr128 = new Room("JR128", "Everyone's favorite lecture classroom", itemsJR128, doorsJR128);
+		jr128 = new Room("JR128", "Everyone's favorite lecture classroom.", itemsJR128, doorsJR128);
 		
 		//HallwayOne creation
 		ArrayList<Item> itemsHallOne = new ArrayList<>();
@@ -97,7 +97,7 @@ public class Game {
 		//Outside creation
 		ArrayList<Item> itemsOutside = new ArrayList<>();
 		Door[] doorsOutside = {null, null, null, null};
-		outside = new Room("Outside", "There's a nice bench here", itemsOutside, doorsOutside);
+		outside = new Room("Outside", "There's a nice bench here.", itemsOutside, doorsOutside);
 		
 		// Room 1
 		
@@ -145,24 +145,35 @@ public class Game {
 		doorsJillsOffice[0] = toxLab;
 		
 		//MOBS
-		jill = new MOB("Jill", "Jill is done with your shit", "Turn in the lab", niceRoom, null);
-		tomK = new MOB("Tom K", "Tom is on sabatical", "42", okayRoom, null);
-		tomM = new MOB("Tom M","Founder of Floor Snacks", "There's food in the floor if you want some", xLab, null);
-		muhummad = new MOB("Muhummad", "Muhummad is working on a lab", "Is Jill in her office?", xLab, null);
+		jill = new MOB("Jill", "Jill is done with your shit.", "Turn in the lab.", niceRoom, null);
+		tomK = new MOB("Tom K", "Tom is on sabatical.", "42", okayRoom, null);
+		tomM = new MOB("Tom M","Founder of Floor Snacks.", "There's food in the floor if you want some.", xLab, null);
+		muhammad = new MOB("Muhammad", "Muhammad is working on a lab.", "Is Jill in her office?", xLab, null);
 		justinBrody = new MOB("Justin Brody", "", "", justinsOffice, null);
 		justinC = new MOB("Justin Clitheroe", "", "Something obnoxious", xLab, null);
-		cat = new MOB("Cat", "", "I'm so behind", xLab, null);
-		julian = new MOB("Julian", "", "", xLab, null);
-		econProfessor = new MOB("Econ Professor", "teaches econ", "Stop dropping mints in my classroom!", vmClassRoom, null);
+		cat = new MOB("Cat", "", "I'm so behind!", xLab, null);
+		julian = new MOB("Julian", "Julian is actually doing work.", "*friendly wave*", xLab, null);
+		econProf = new MOB("Econ Professor", "He teaches econ downstairs.", "Stop dropping mints in my classroom!", vmClassRoom, null);
 		rosie = new MOB("Rosie", "", "", xLab, null);
 		cara = new MOB("Cara", "", "", xLab, null);
 		michael = new MOB("Michael", "", "", xLab, null);
 		MobScheduler.scheduleMOB(jill);
 		MobScheduler.scheduleMOB(tomK);
+		MobScheduler.scheduleMOB(tomM);
+		MobScheduler.scheduleMOB(muhammad);
+		MobScheduler.scheduleMOB(justinBrody);
+		MobScheduler.scheduleMOB(justinC);
+		MobScheduler.scheduleMOB(cat);
+		MobScheduler.scheduleMOB(julian);
+		MobScheduler.scheduleMOB(econProf);
 		mobsTracker.add(jill);
 		mobsTracker.add(tomK);
+		mobsTracker.add(tomM);
+		mobsTracker.add(muhammad);
+		mobsTracker.add(justinBrody);
+		mobsTracker.add(justinC);
+		mobsTracker.add(cat);
+		mobsTracker.add(julian);
+		mobsTracker.add(econProf);
 	}
-	
-
-
 }
