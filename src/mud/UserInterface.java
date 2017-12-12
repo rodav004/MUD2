@@ -38,8 +38,13 @@ public class UserInterface {
 
 	private JPanel inventoryPanel = new JPanel();
 	private JLabel inventoryItemsLabel = new JLabel("Inventory");
-	
-	private JTextArea instructions = new JTextArea();
+
+	private JTextArea instructions = new JTextArea() {
+		@Override
+		public void append(String str) {
+			super.append(str + "\n");
+		}
+	};
 	
 	public JFrame getFrame() {
 		return this.frm;
@@ -152,7 +157,6 @@ public class UserInterface {
 		playerOne.location.characters.stream()
 				.filter((o) -> (o instanceof MOB))
 				.map(Character::getName)
-				.map(StringUtils::appendNewline)
 				.forEach(mobsInRoom::append);
 
 		inputBox.setText(entryState.promptString);
