@@ -11,18 +11,6 @@ public class Character extends GameObject {
 		this.location = location;
 		this.inventory = item;
 	}
-	/**
-	 * 
-	 * @return an ArrayList of the names of the items in inventory
-	 */
-	public ArrayList<String> getItems() {
-		ArrayList<Item> items = this.inventory;
-		ArrayList<String> itemNames = new ArrayList<>();
-		for (Item item : items) {
-			itemNames.add(item.name);
-		}
-		return itemNames;
-	}
 	
 	/* public String getSingularItem(int index) {
 		return inventory.get(index).getName();
