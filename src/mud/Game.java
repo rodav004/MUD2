@@ -1,90 +1,138 @@
 package mud;
+
 import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Game {
+	public static Room niceRoom;
+	public static Room okayRoom;
 
 	public static List<Player> players = new ArrayList<>();
-	public static Room room1;
-	public static Room room2;
-	public static Room room3;
+
+	private static List<Room> rooms;
+
+	private static List<Item> items;
+	
+	private static ArrayList<MOB> mobsTracker = new ArrayList<>();
+
+	public static List<Character> nearbyCharacters(Player player) {
+		return Stream.concat(
+				players.stream(),
+				mobsTracker.stream())
+				.filter((c) -> c.location == player.location)
+				.collect(Collectors.toList());
+	}
+
+	public static Observable mobMovement = new Observable() {
+		@Override
+		public void notifyObservers() {
+			this.setChanged();
+			super.notifyObservers();
+		}
+	};
 
 	public static Player newPlayer(String playerName) {
-		Player player = new Player(playerName, "You have no description yet", Game.room1, new ArrayList<>());
+		Player player = new Player(playerName, "You have no description yet", Game.rooms.get(0), new ArrayList<>());
 		players.add(player);
 		return player;
 	}
 
 	public static void start() {
-		
-		// Room 1
-		
-		// Room 1 items
-		Item torch = new Item("torch","A burning stick.");
-		Item apple = new Item("apple","A yummy red fruit.");
-		Item yapple = new Item("yapple","A yummy yellow fruit.");
-		
-		//Room 1 attributes
-		List<Item> itemsRoom1 = new ArrayList<>();
-			itemsRoom1.add(apple);
-			itemsRoom1.add(torch);
-			itemsRoom1.add(yapple);
-		List<Character> peopleRoom1 = new ArrayList<>();
-		Door[] doorsRoom1 = {null,null,null,null};
-		
-		//Room 1 constructed
-		room1 = new Room("Nice Room","This is a nice room.",itemsRoom1,peopleRoom1,doorsRoom1);
+		rooms = Arrays.asList(
+				new Room(
+						"X-Lab", "A place for MACS students to do work.",
+						new Item("laptop", "A necessary item for computer science students"),
+						new Item("notebook", "A notebook? Who uses these anymore?"),
+						new Item("mints", "But are they floor mints?")
+				),
+				new Room(
+						"Jill's Office", "The door is open.",
+						new Item("trail mix","A good snack")
+				),
+				new Room(
+						"Tom's Office", "The door is open."
+				),
+				new Room(
+						"Justin's Office", "The door is open."
+				),
+				new Room(
+						"Julia Roger's Lobby", "A place where students wait for class.",
+						new Item("backpack", "Useful for holding stuff")
+				),
+				new Room(
+						"JR128", "Everyone's favorite lecture classroom.",
+						new Item("paper", "Probably good for writing"),
+						new Item("textbook", "Looks like its never been opened")
+				),
+				new Room(
+						"Outside", "There's a nice bench here."
+				),
+				new Room(
+						"First stretch of hallway", ""
+				),
+				new Room(
+						"Second stretch of hallway", "",
+						new Item("granola bar", "Cara's only food")
+				),
+				new Room(
+						"Okay Room", "This room is okay.",
+						new Item("rock","It's grayish and hard."),
+						new Item("pen","Useful for writing.")
+				),
+				new Room(
+						"Nice Room","This is a nice room.",
+						new Item("torch","This is a burning stick."),
+						new Item("apple","A yummy red fruit.")
+				)
+		);
 
-		//Room 2
-		
-		//Room 2 Items
-		Item rock = new Item("rock","Grayish and hard.");
-		Item pen = new Item("pen","Useful for writing.");
-		
-		//Room 2 attributes
-		List<Item> itemsRoom2 = new ArrayList<>();
-			itemsRoom2.add(rock);
-			itemsRoom2.add(pen);
-		List<Character> peopleRoom2 = new ArrayList<>();
-		Door[] doorsRoom2 = {null,null,null,null};
-		
-		//Room 2 constructed
-		room2 = new Room("Okay Room","This room is okay.",itemsRoom2,peopleRoom2,doorsRoom2);
+		connectRooms("Nice Room", 1, "X-Lab");
+		connectRooms("Nice Room", 2, "Okay Room");
+		connectRooms("Okay Room", 1, "Jill's Office");
+		connectRooms("X-Lab", 2, "Jill's Office");
 
-		MOB mob1 = new MOB("Vector", "A talking crocodile", room1,null, "Find the computer room!");
-		MobScheduler.scheduleMOB(mob1);
-		MOB mob2 = new MOB("Charmy", "A talking bee", room1,null, "Vector told me that he wants me to find five top secret disks. But like, what's a top secret disk?");
-		MobScheduler.scheduleMOB(mob2);
+		List<MOB> mobs = Arrays.asList(
+				new MOB("Jill", "Jill is done with your shit.", "Turn in the lab.", findRoom("Nice Room")),
+				new MOB("Tom K", "Tom is on sabatical.", "42", findRoom("Okay Room")),
+				new MOB("Justin Brody", "", "", findRoom("Justin's Office")),
+				new MOB("Tom M","Founder of Floor Snacks.", "There's food in the floor if you want some.", findRoom("X-Lab")),
+				new MOB("Muhammad", "Muhammad is working on a lab.", "Is Jill in her office?", findRoom("X-Lab")),
+				new MOB("Justin Clitheroe", "", "Something obnoxious", findRoom("X-Lab")),
+				new MOB("Cat", "", "I'm so behind!", findRoom("X-Lab")),
+				new MOB("Julian", "Julian is actually doing work.", "*friendly wave*", findRoom("X-Lab")),
+				new MOB("Rosie", "", "", findRoom("X-Lab")),
+				new MOB("Cara", "", "", findRoom("X-Lab")),
+				new MOB("Michael", "", "", findRoom("X-Lab"))
+		);
+		mobs.forEach(MobScheduler::scheduleMOB);
+		mobsTracker.addAll(mobs);
+	}
 
-		//Room 3
-		
-		//Room 3 Items
-		Item coffee = new Item("coffee","A paper cup half full of lukewarm coffee.");
-		
-		//Room 3 attributes
-		ArrayList<Item> itemsRoom3 = new ArrayList<>();
-			itemsRoom3.add(coffee);
-		ArrayList<Character> peopleRoom3 = new ArrayList<>();
-		Door[] doorsRoom3 = {null,null,null,null};
-		
-		//Room 3 constructed
-		room3 = new Room("X-lab","No work gets done in here.",itemsRoom3,peopleRoom3,doorsRoom3);
-		
-		//Construct doors
-		Door door1 = new Door(room2);
-		Door door2 = new Door(room1);
-		
-		Door door3 = new Door(room3);
-		Door door4 = new Door(room1);
-		
-		//Assign doors to rooms
-		doorsRoom1[2] = door1;
-		doorsRoom1[1] = door3;
-		doorsRoom2[0] = door2;
-		doorsRoom3[3] = door4;
-		
+	private static void addItem(String roomName, String ...itemName) {
+		Room theRoom = findRoom(roomName);
+		Arrays.stream(itemName)
+				.map(Game::findItem)
+				.forEach(theRoom.items::add);
+	}
+
+	private static Item findItem(String itemName) {
+		return items.stream().filter((i) -> i.name.equalsIgnoreCase(itemName)).findFirst().get();
+	}
+	private static Room findRoom(String roomName) {
+		return rooms.stream().filter((r) -> r.name.equalsIgnoreCase(roomName)).findFirst().get();
+	}
+
+	private static void connectRooms(String roomName, int direction, String connectedRoomName) {
+		rooms.stream().map(Room::getName).forEach(System.out::println);
+		Room theRoom = rooms.stream().filter((r) -> r.getName().equalsIgnoreCase(connectedRoomName)).findFirst().get();
+		Room otherRoom = rooms.stream().filter((r) -> r.getName().equalsIgnoreCase(connectedRoomName)).findFirst().get();
+		theRoom.doors[direction] = new Door(otherRoom);
+
+		int oppositeDirection = direction + ((direction < 2) ? 2 : -2);
+		otherRoom.doors[oppositeDirection] = new Door(theRoom);
 	}
 
 }
