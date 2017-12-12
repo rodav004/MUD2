@@ -87,7 +87,6 @@ public class UserInterface {
 		//creation of bottom bar where the player will enter actions
 		this.inputButton = new JButton("Submit");
 		this.outBox = new JTextField();
-		Stream.of(outBox,instructions,mobsInRoom).forEach((c) -> c.setVisible(false));
 
 		//setting the instructions text area
 		instructions.setText(
@@ -104,7 +103,6 @@ public class UserInterface {
 					playerOne = Game.newPlayer(inputBox.getText());
 					roomName.setText(playerOne.location.getName());
 					outBox.setText("Hello " + name + "! You are in the " + roomName.getText());
-
 
 					inventoryItemsLabel.setVisible(true);
 					mobsInRoom.setVisible(true);
