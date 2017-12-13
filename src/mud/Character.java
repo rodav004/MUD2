@@ -1,6 +1,10 @@
 package mud;
 import java.util.ArrayList;
 
+/**
+* Represents an entity inside the MUD.
+* This is an abstract class implemented by Player and MOB.
+*/
 public class Character extends GameObject {
 	public Room location;
 	ArrayList<Item> inventory;
