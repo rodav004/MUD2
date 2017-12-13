@@ -132,7 +132,7 @@ public class UserInterface implements Observer{
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
+	public synchronized void update(Observable o, Object arg) {
 		//System.out.println(mobsInRoom.getText());
 
 		MOBSlist.removeAll(MOBSlist);
