@@ -58,7 +58,7 @@ public class Game {
 		itemsxLab.add(laptop);
 		itemsxLab.add(notebook);
 		Door[] doorsxLab = {null, null, null, null};
-		xLab = new Room("X-Lab", "A place for MACS students to do work.", itemsxLab, doorsxLab);
+		xLab = new Room("the X-Lab", "A place for MACS students to do work.", itemsxLab, doorsxLab);
 		
 		//jillsOffice creation 
 		ArrayList<Item> itemsJillsOffice = new ArrayList<>();
@@ -80,7 +80,7 @@ public class Game {
 		ArrayList<Item> itemsJRLobby = new ArrayList<>();
 		itemsJRLobby.add(backpack);
 		Door[] doorsJRLobby = {null, null, null, null};
-		jrLobby = new Room("Julia Roger's Lobby", "A place where students wait for class.", itemsJRLobby, doorsJRLobby);
+		jrLobby = new Room("the Julia Rogers Lobby", "A place where students wait for class.", itemsJRLobby, doorsJRLobby);
 		
 		//JR128 creation
 		ArrayList<Item> itemsJR128 = new ArrayList<>();
@@ -92,27 +92,27 @@ public class Game {
 		//HallwayOne creation
 		ArrayList<Item> itemsHallOne = new ArrayList<>();
 		Door[] doorsHallOne = {null, null, null, null};
-		hallwayOne = new Room("First stretch of hallway", "", itemsHallOne, doorsHallOne);
+		hallwayOne = new Room("the first stretch of hallway", "", itemsHallOne, doorsHallOne);
 		
 		//HallwayTwo creation
 		ArrayList<Item> itemsHallTwo = new ArrayList<>();
 		Door[] doorsHallTwo = {null, null, null, null};
-		hallwayTwo = new Room("Second stretch of hallway", "", itemsHallTwo, doorsHallTwo);
+		hallwayTwo = new Room("the second stretch of hallway", "", itemsHallTwo, doorsHallTwo);
 		
 		//HallwayThree
 		ArrayList<Item> itemsHallThree = new ArrayList<>();
 		Door[] doorsHallThree = {null, null, null, null};
-		hallwayThree = new Room("Third stretch of hallway", "", itemsHallThree, doorsHallThree);
+		hallwayThree = new Room("the third stretch of hallway", "", itemsHallThree, doorsHallThree);
 		
 		//HallwayFour
 		ArrayList<Item> itemsHallFour = new ArrayList<>();
 		Door[] doorsHallFour = {null, null, null, null};
-		hallwayFour = new Room("Fourth stretch of hallway", "", itemsHallFour, doorsHallFour);
+		hallwayFour = new Room("the fourth stretch of hallway", "", itemsHallFour, doorsHallFour);
 		
 		//HallwayFive
 		ArrayList<Item> itemsHallFive = new ArrayList<>();
 		Door[] doorsHallFive = {null, null, null, null};
-		hallwayFive = new Room("Fifth stretch of hallway", "", itemsHallFive, doorsHallFive);
+		hallwayFive = new Room("the fifth stretch of hallway", "", itemsHallFive, doorsHallFive);
 		
 		//Outside creation
 		ArrayList<Item> itemsOutside = new ArrayList<>();
@@ -122,7 +122,7 @@ public class Game {
 		//Bathroom
 		ArrayList<Item> itemsBathroom = new ArrayList<>();
 		Door[] doorsBathroom = {null, null, null, null};
-		bathroom = new Room("Bathrooms", "Why would there be food in here?", itemsBathroom, doorsBathroom);
+		bathroom = new Room("the bathrooms", "Why would there be food in here?", itemsBathroom, doorsBathroom);
 		
 		//JR130
 		ArrayList<Item> itemsJR130 = new ArrayList<>();
@@ -137,28 +137,28 @@ public class Game {
 		//Robotics Lab
 		ArrayList<Item> itemsRobLab = new ArrayList<>();
 		Door[] doorsRobLab = {null, null, null, null};
-		roboticsLab = new Room("Robotics Lab", "", itemsRobLab, doorsRobLab);
+		roboticsLab = new Room("the Robotics Lab", "", itemsRobLab, doorsRobLab);
 		
 		//Stairs
 		ArrayList<Item> itemsStairs = new ArrayList<>();
 		Door[] doorsStairs = {null, null, null, null};
-		stairs = new Room("Stairs", "", itemsStairs, doorsStairs);
+		stairs = new Room("the stairs", "", itemsStairs, doorsStairs);
 		
 		//VM lobby
 		ArrayList<Item> itemsVMLobby = new ArrayList<>();
 		Door[] doorsVMLobby = {null, null, null, null};
-		vanMeterLobby = new Room("Van Meter Lobby", "", itemsVMLobby, doorsVMLobby);
+		vanMeterLobby = new Room("the Van Meter Lobby", "", itemsVMLobby, doorsVMLobby);
 		
 		//VM hall
 		ArrayList<Item> itemsVMHall = new ArrayList<>();
 		Door[] doorsVMHall = {null, null, null, null};
-		vanMeterHallway = new Room("Van Meter Hallway", "", itemsVMHall, doorsVMHall);
+		vanMeterHallway = new Room("the Van Meter Hallway", "", itemsVMHall, doorsVMHall);
 		
 		//VM Class
 		ArrayList<Item> itemsVMClass = new ArrayList<>();
 		itemsVMClass.add(mints);
 		Door[] doorsVMClass = {null, null, null, null};
-		vmClassRoom = new Room("Van Meter Classroom", "", itemsVMClass, doorsVMClass);
+		vmClassRoom = new Room("a Van Meter Classroom", "", itemsVMClass, doorsVMClass);
 		
 		//The Van
 		ArrayList<Item> itemsTheVan = new ArrayList<>();
