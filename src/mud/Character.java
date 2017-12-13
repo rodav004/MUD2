@@ -82,7 +82,7 @@ public class Character extends GameObject {
 		if (direction.equals("north") || direction.equals("up")) {
 			Door exit = location.doors[0];
 			if (exit != null) {
-				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+				newRoom = "You enter " + exit.room.name + ". "+ exit.room.description;
 				location = exit.room;
 			}
 			else {
@@ -92,7 +92,7 @@ public class Character extends GameObject {
 		else if (direction.equals("south") || direction.equals("down")) {
 			Door exit = location.doors[2];
 			if (exit != null) {
-				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+				newRoom = "You enter " + exit.room.name + ". "+ exit.room.description;
 				location = exit.room;
 			}
 			else {
@@ -112,7 +112,7 @@ public class Character extends GameObject {
 		else if (direction.equals("west") || direction.equals("left")) {
 			Door exit = location.doors[3];
 			if (exit != null) {
-				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+				newRoom = "You enter " + exit.room.name + ". "+ exit.room.description;
 				location = exit.room;
 			}
 			else {
