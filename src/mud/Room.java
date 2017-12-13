@@ -2,6 +2,13 @@ package mud;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+* A room in the MUD.
+* Contains Characters and Items.
+* Note that Characters also have a reference to a room,
+* so both fields should be modified at the same time to prevent an
+* inconsistency.
+*/
 public class Room extends GameObject {
 	ArrayList<Item> items;
 	ArrayList<Character> characters = new ArrayList<Character>();
