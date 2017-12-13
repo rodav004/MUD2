@@ -19,6 +19,12 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.Observable;
 import java.util.Observer;
+
+/**
+* The UI for the MUD.
+* Multiple instances can be created to allow for
+* multiplayer.
+*/
 public class UserInterface implements Observer{	
 	
 	private JTextField inputBox;
