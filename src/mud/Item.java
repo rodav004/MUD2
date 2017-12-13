@@ -21,7 +21,7 @@ public class Item extends GameObject {
 		return contains;
 	}
 	
-	public String getContainedItem(Character player, Item item) {
+	public String getContainedItem(Player player, Item item) {
 		String result = "";
 		if (item.containsItem()) {
 			player.inventory.add(item.containedItem);
@@ -31,4 +31,3 @@ public class Item extends GameObject {
 		return result;
 	}
 	
-}
