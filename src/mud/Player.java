@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class Player extends Character {
 	
-	public ArrayList<Item> inventory;
+	ArrayList<Item> inventory;
 
-	public Player(String name, String description, Room location, ArrayList<Item> inventory) {
-		super(name, description, location, inventory);
+	public Player(String name, String description, String phrase, Room location, ArrayList<Item> inventory) {
+		super(name, description, phrase, location, inventory);
 		this.inventory = inventory;
 		// TODO Auto-generated constructor stub
 	}
@@ -64,6 +64,15 @@ public class Player extends Character {
 			else result = "The item " + itemName + " is not in your inventory.";
 			}
 		return result;
+	}
+	
+	public String talkTo(String mobName) {
+		for (Character m : this.location.characters) {
+			if (m.name.toLowerCase().equals(mobName)) {
+				return m.name + ": " + m.speak(this);
+			}
+		}
+			return "Sorry, that person is not in the room or does not exist!";
 	}
 	
 	public String look() {
