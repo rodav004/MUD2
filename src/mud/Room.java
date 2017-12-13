@@ -1,20 +1,39 @@
 package mud;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Room extends GameObject {
-	List<Item> items;
-	List<Character> characters;
+	ArrayList<Item> items;
 	Door[] doors;
 	
-	public Room(String name, String description, List<Item> items, List<Character> characters,Door[] doors) {
+	public Room(String name, String description, ArrayList<Item> items, Door[] doors) {
 		this.name = name;
 		this.description = description;
 		this.items = items;
-		this.characters = characters;
 		this.doors = doors;
 	}
-
-public String getSingularItem(int index) {
+	
+	public ArrayList<String> getItems() {
+		ArrayList<Item> items = this.items;
+		ArrayList<String> itemNames = new ArrayList<>();
+		for (Item item : items) {
+			itemNames.add(item.name);
+		}
+		return itemNames;
+	}
+	
+	public String getSingularItem(int index) {
 		return items.get(index).getName();
 	}
+	
+	public boolean contains(Item i) {
+		return items.contains(i);
+	}
+	
+	public boolean hasDoor(int direction) {
+		if (doors[direction] != null) {
+			return true;
+		}
+		else return false;
+	}
+	
 }
