@@ -1,6 +1,11 @@
 package mud;
 import java.util.ArrayList;
 
+
+/**
+* Contains the model objects for the game.
+* Because there is only ever one game, this class contains only static members.
+*/
 public class Game {
 	static Room xLab;
 	static Room jillsOffice;
