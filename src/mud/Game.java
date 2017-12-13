@@ -49,8 +49,9 @@ public class Game {
 		Item paper = new Item("paper", "Probably good for writing");
 		Item mints = new Item("mints", "But are they floor mints?");
 		Item granolaBar = new Item("granola bar", "Cara's only food");
-		Item backpack = new Item("backpack", "Useful for holding stuff");
 		Item trailMix = new Item("trail mix", "A good snack");
+		Item apple = new Item("apple", "A delicious red fruit");
+		Item backpack = new Item("backpack", "Useful for holding stuff", apple);
 		
 		//xLab creation
 		ArrayList<Item> itemsxLab = new ArrayList<>();
