@@ -4,17 +4,16 @@ import java.util.ArrayList;
 public class Character extends GameObject {
 	public Room location;
 	ArrayList<Item> inventory;
+	String phrase;
 	
-	public Character(String name, String description, Room location, ArrayList<Item> item) {
+	public Character(String name, String description, String phrase, Room location, ArrayList<Item> item) {
 		this.description = description;
 		this.name = name;
 		this.location = location;
 		this.inventory = item;
+		this.phrase = phrase;
+		location.characters.add(this);
 	}
-	/**
-	 * 
-	 * @return an ArrayList of the names of the items in inventory
-	 */
 	
 	/* public String getSingularItem(int index) {
 		return inventory.get(index).getName();
@@ -103,7 +102,7 @@ public class Character extends GameObject {
 		else if (direction.equals("east") || direction.equals("right")) {
 			Door exit = location.doors[1];
 			if (exit != null) {
-				newRoom = "You enter the " + exit.room.name + ". "+ exit.room.description;
+				newRoom = "You enter " + exit.room.name + ". "+ exit.room.description;
 				location = exit.room;
 			}
 			else {
@@ -126,6 +125,15 @@ public class Character extends GameObject {
 		
 		return newRoom;
 		
+	}
+	
+	public String speak(Player p) {
+		if (p.location.equals(this.location)) {
+			return this.phrase;
+		}
+		else {
+			return "Sorry, that person is not in this room!";
+		}
 	}
 	
 	
