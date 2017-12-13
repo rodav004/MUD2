@@ -230,15 +230,15 @@ public class Game {
 		doorsVMClass[2] = toVMHall;
 		
 		//MOBS
-		jill = new MOB("Jill", "Jill is done with your shit.", "Turn in the lab.", jillsOffice, null);
-		tomK = new MOB("Tom K", "Tom is on sabatical.", "42", tomsOffice, null);
-		tomM = new MOB("Tom M","Founder of Floor Snacks.", "There's food in the floor if you want some.", xLab, null);
-		muhammad = new MOB("Muhammad", "Muhammad is working on a lab.", "Is Jill in her office?", xLab, null);
-		justinBrody = new MOB("Justin Brody", "", "", justinsOffice, null);
-		justinC = new MOB("Justin Clitheroe", "", "Something obnoxious", xLab, null);
-		cat = new MOB("Cat", "", "I'm so behind!", xLab, null);
+		jill = new MOB("Jill", "Jill is done with your shit.", "\"Turn in the lab.\"", jillsOffice, null);
+		tomK = new MOB("TomK", "Tom is on sabatical.", "\"42\"", tomsOffice, null);
+		tomM = new MOB("TomM","Founder of Floor Snacks.", "\"There's food in the floor if you want some.\"", xLab, null);
+		muhammad = new MOB("Muhammad", "Muhammad is working on a lab.", "\"Is Jill in her office?\"", xLab, null);
+		justinBrody = new MOB("JustinBrody", "", "", justinsOffice, null);
+		justinC = new MOB("JustinClitheroe", "", "something obnoxious", xLab, null);
+		cat = new MOB("Cat", "", "\"I'm so behind!\"", xLab, null);
 		julian = new MOB("Julian", "Julian is actually doing work.", "*friendly wave*", xLab, null);
-		econProf = new MOB("Econ Professor", "He teaches econ downstairs.", "Stop dropping mints in my classroom!", vmClassRoom, null);
+		econProf = new MOB("EconProfessor", "He teaches econ downstairs.", "\"Stop dropping mints in my classroom!\"", vmClassRoom, null);
 		rosie = new MOB("Rosie", "", "", xLab, null);
 		cara = new MOB("Cara", "", "", xLab, null);
 		michael = new MOB("Michael", "", "", xLab, null);
