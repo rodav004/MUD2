@@ -29,6 +29,15 @@ public class Parser {
 		else if (splitStrings[0].equals("look")) {
 			r = playerOne.look();
 		}
+		else if (action.equals("examine")) {
+			Item itemWanted = null;
+			for (Item item : playerOne.location.items) {
+				if (direction.equals(item.name)) {
+					itemWanted = item;
+				}
+			}
+			return itemWanted.getContainedItem(playerOne, itemWanted);
+		}
 		else {
 			r = "Oops! I don't know what you're trying to say!";
 		}
