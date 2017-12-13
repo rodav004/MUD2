@@ -76,6 +76,7 @@ public class UserInterface implements Observer{
 		//setting the instructions text area
 		instructions.append("To change rooms: move + north/south/east/west \n");
 		instructions.append("To add an item to inventory, click the button \n");
+		instructions.append("To check if an item contains another item: examine + item name \n");
 		instructions.append("To drop an item: drop + item name");
 		
 		outBox.setText("Welcome to our unnamed game!");
