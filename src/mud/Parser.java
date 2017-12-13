@@ -8,7 +8,8 @@ public class Parser {
  * @param input the action to be done
  * @return a String saying the result of the action
  */	
-	public static String parse(Character playerOne, String input) {
+	public static String parse(Player playerOne, String input) {
+		input.toLowerCase();
 		String[] splitStrings = input.split(" ");
 		String r = "test";
 		
@@ -29,10 +30,13 @@ public class Parser {
 		else if (splitStrings[0].equals("look")) {
 			r = playerOne.look();
 		}
-		else if (action.equals("examine")) {
+		else if (splitStrings[0].equals("talk")) {
+			r = playerOne.talkTo(splitStrings[2]);
+		}
+		else if (splitStrings[0].equals("examine")) {
 			Item itemWanted = null;
 			for (Item item : playerOne.location.items) {
-				if (direction.equals(item.name)) {
+				if (splitStrings[1].equals(item.name)) {
 					itemWanted = item;
 				}
 			}
