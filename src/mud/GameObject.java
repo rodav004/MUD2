@@ -1,5 +1,8 @@
 package mud;
-
+/***
+ * GameObject contains general getters and setters applicable for all rooms, characters and subsets of
+ * @author Cara Lam, Rosie David, Michael Savich
+ */
 
 public class GameObject {
 	String name;
